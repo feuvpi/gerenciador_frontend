@@ -38,21 +38,21 @@ const FormRegister = () => {
   return (
     <div
       name="home"
-      className="w-full md:h-screen bg-zinc-200 flex flex-col justify-between"
+      className="w-full h-auto md:h-full bg-slate-800 flex flex-col justify-between"
     >
       <div className="grid max-w-screen-2xl m-auto items-center">
         {/* column 1 */}
 
-        <div class="h-auto w-screen flex items-center justify-center py-28 md:py-32 px-4 sm:px-6 lg:px-12">
-          <div class="max-w-lg w-full space-y-6 border-2 border-indigo-600 rounded-md p-2 shadow-xl bg-indigo-200">
+        <div class="h-auto w-screen flex items-center justify-center py-16 md:py-22 px-4 sm:px-6 lg:px-12">
+          <div class="max-w-lg w-full space-y-6 border-2 border-indigo-600 rounded-md p-2 shadow-xl bg-slate-900">
             {/* FORM HEADER */}
 
             <div>
               <ChartBarIcon className="mx-auto h-16 w-auto text-indigo-600" />
-              <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+              <h2 class="mt-6 text-center text-3xl font-extrabold text-slate-200">
                 Crie uma nova conta
               </h2>
-              <p class="mt-2 text-center text-sm text-gray-600">
+              <p class="mt-2 text-center text-sm text-slate-200">
                 <a
                   href="/"
                   class="font-medium text-indigo-600 hover:text-indigo-500"
@@ -75,7 +75,7 @@ const FormRegister = () => {
                 {/* INSERIR NOME */}
                 <div className="col-span-2 flex flex-row justify-center">
                   <div className="pr-1 py-2 w-full">
-                    <label for="name" class="font-bold text-sm">
+                    <label for="name" class="font-bold text-sm text-slate-300">
                       Olá, como você se chama?
                     </label>
                     <input
@@ -92,7 +92,7 @@ const FormRegister = () => {
                 {/* EMAIL */}
                 <div className="col-span-2 flex flex-row justify-center">
                   <div className="pr-1 py-2 w-full">
-                    <label for="email-address" class="font-bold text-sm">
+                    <label for="email-address" class="font-bold text-sm text-slate-300">
                       Digite seu e-mail:
                     </label>
                     <input
@@ -111,7 +111,7 @@ const FormRegister = () => {
                 {/* PASSWORD & CONFIRM */}
                 <div className="col-span-2 flex flex-row justify-center">
                   <div className="pr-1 py-2 w-full">
-                    <label for="password" class="font-bold text-sm">
+                    <label for="password" class="font-bold text-sm text-slate-300">
                       Digite uma senha:
                     </label>
                     <input
@@ -126,7 +126,7 @@ const FormRegister = () => {
                   </div>
 
                   <div className="w-full pl-1 py-2">
-                    <label for="confirm-password" class="font-bold text-sm">
+                    <label for="confirm-password" class="font-bold text-sm text-slate-300">
                       Confirme sua senha:
                     </label>
                     <input
@@ -144,7 +144,7 @@ const FormRegister = () => {
                   <h3>{errorMessage}</h3>
                 </div>
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-center text-slate-300">
                 <p> - ou - </p>
               </div>
               <div className="flex justify-center py-4">

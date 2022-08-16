@@ -83,7 +83,7 @@ export const Operations = () => {
         onClick={e => {
           setShow(handleClose(e, show))
         }}
-        className='h-screen flex flex-col pt-28 px-8 bg-gray-700'
+        className='h-screen flex flex-col pt-28 px-8 bg-slate-800'
       >
         <div className='flex justify-center'>
           <div className='inline-flex'>
