@@ -7,9 +7,13 @@ import App from './App';
 import axios from 'axios';
 import { api } from './services/api'
 
-axios.defaults.headers.common["Authorization"] = JSON.parse(localStorage.getItem("user")).token
+if(localStorage.getItem('user')){
+  axios.defaults.headers.common["Authorization"] = JSON.parse(localStorage.getItem("user")).token
+  api.defaults.headers.Authorization = JSON.parse(localStorage.getItem("user")).token
+}
 
-api.defaults.headers.Authorization = JSON.parse(localStorage.getItem("user")).token
+
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
