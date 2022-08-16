@@ -26,7 +26,7 @@ export const Operations = () => {
     ;(async () => {
     console.log("this: " + user.id)
       const response = await getOperations(user.id)
-      console.log("response: " + response);
+      setOperations(response)
       //setOperations(response.data)
       setLoading(false)
     })()
@@ -141,19 +141,19 @@ export const Operations = () => {
                 </tr>
               </thead>
               <tbody>
-                {operations.map(() => (
+                {operations.map((operation) => (
                   <tr className='bg-slate-400 dark:border-gray-700 hover:bg-slate-500'>
                     <th
                       scope='row'
                       className='py-4 px-6 font-medium text-slate-200 whitespace-nowrap'
                     >
-                      PETR4
+                      {operation.symbol}
                     </th>
-                    <td className='py-4 px-6 text-center'>COMPRA</td>
-                    <td className='py-4 px-6 text-center'>R$10.00</td>
-                    <td className='py-4 px-6 text-center'>2000</td>
-                    <td className='py-4 px-6 text-center'>R$20000.00</td>
-                    <td className='py-4 px-6 text-center'>07/08/2022</td>
+                    <td className='py-4 px-6 text-center'>{operation.type}</td>
+                    <td className='py-4 px-6 text-center'>{operation.cost}</td>
+                    <td className='py-4 px-6 text-center'>{operation.quantity}</td>
+                    <td className='py-4 px-6 text-center'>{operation.cost * operations.quantity}</td>
+                    <td className='py-4 px-6 text-center'>{operation.operationDate}</td>
                     <td className='py-4 px-6 text-center'>
                       <button className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
                         <PencilIcon className='h-4 text-slate-200' />
