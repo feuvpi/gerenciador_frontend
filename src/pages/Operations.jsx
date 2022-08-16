@@ -23,10 +23,11 @@ export const Operations = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
     console.log("this: " + user.id)
       const response = await getOperations(user.id)
       setOperations(response)
+      console.log(response)
       //setOperations(response.data)
       setLoading(false)
     })()
@@ -152,7 +153,7 @@ export const Operations = () => {
                     <td className='py-4 px-6 text-center'>{operation.type}</td>
                     <td className='py-4 px-6 text-center'>{operation.cost}</td>
                     <td className='py-4 px-6 text-center'>{operation.quantity}</td>
-                    <td className='py-4 px-6 text-center'>{operation.cost * operations.quantity}</td>
+                    <td className='py-4 px-6 text-center'>{parseFloat(operation.cost*operation.quantity)}</td>
                     <td className='py-4 px-6 text-center'>{operation.operationDate}</td>
                     <td className='py-4 px-6 text-center'>
                       <button className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
@@ -172,3 +173,5 @@ export const Operations = () => {
 }
 
 export default Operations
+
+/*parseDouble(parseFloat(operation.cost) * parseFloat(operations.quantity))}*/

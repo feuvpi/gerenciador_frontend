@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export const api = axios.create({
     baseURL: "https://gestorportfolio-backend.herokuapp.com/",
+    //baseURL: "http://localhost:3000",
 });
 
 // -- requisição para autenticação
@@ -11,15 +12,13 @@ export const createSession = async (email, password) => {
 }
 
 // -- requisição para buscar (GET) todas as operações salvas por um determinado usuario
-export const getOperations = async(user) => {
+export const getOperations = async (user) => {
     //console.log("user: " + user)
     //console.log(JSON.parse(localStorage.getItem('user')).token)
     //console.log("token2: " + api.defaults.headers.Authorization)
-    console.log("userid: " + user)
     try {
-        api.post('/operations', {user}).then((req, res) => {
-            console.log("resposta de getOperations: " + res)
-        })
+        const response = await api.post('/operations', {user: user})
+            return response.data;
     } catch (err) {
         console.log(err)
     }
