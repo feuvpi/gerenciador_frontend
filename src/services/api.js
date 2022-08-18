@@ -1,13 +1,22 @@
 import axios from 'axios';
+const config = require('../config.json')
+
+const BASE_URL= config.API_URL || 'http://localhost:3000'
 
 
 export const api = axios.create({
-    baseURL: "https://gestorportfolio-backend.herokuapp.com/",
-    //baseURL: "http://localhost:3000",
+    //baseURL: "https://gestorportfolio-backend.herokuapp.com/",
+    baseURL: BASE_URL,
 });
+
+// -- requisição para criação de usuário --
+export const createUser = async (name, email, password) => {
+    return api.post('/auth/register', { name, email, password });
+    }
 
 // -- requisição para autenticação
 export const createSession = async (email, password) => {
+    console.log(BASE_URL)
     return api.post('/auth/authenticate', { email, password });
 }
 
@@ -23,9 +32,9 @@ export const getOperations = async (user) => {
         console.log(err)
     }
     
-    
 }
 
+// -- requisição para criação de nova operação
 export const postOperation = async(operation) => {
     console.log("submiting:")
     console.log(operation)

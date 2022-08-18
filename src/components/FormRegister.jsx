@@ -1,39 +1,52 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import bgTransaction from "../assets/undraw_investment_data_re_sh9x.svg";
 import { FaGoogle } from "react-icons/fa";
 import { ChartBarIcon } from "@heroicons/react/outline";
-import { useState } from "react";
-import Axios from "axios";
+import { AuthContext } from "../contexts/auth"
+import { createUser } from '../services/api';
 
 const FormRegister = () => {
 
+  const { login } = useContext(AuthContext);
+
   // -- states
   const [emailReg, setEmailReg] = useState("");
+  const [nameReg, setNameReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("")
-
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     navigate("/");
   };
 
-  const register = () => {
-    if(passwordReg === confirmPassword){
-      setErrorMessage("As senhas não estão iguais.");
+  // -- method for calling user registration service
+  const register = async () => {
+    if(passwordReg !== confirmPassword){
+      setErrorMessage("Senhas não conferem.");
     } else {
+      // -- cal the api service here
       setErrorMessage("");
-      Axios.post("http://localhost:3000/auth/register", {
-      email: emailReg,
-      password: passwordReg,
-    }).then((response) => {
-      console.log(response)
-    })
+      try {
+        console.log(emailReg)
+        console.log(nameReg)
+        const userCreated = await createUser(nameReg, emailReg, passwordReg);
+        if (userCreated){
+          console.log("Usuário criado com sucesso:")
+          console.log(userCreated)
+          setNameReg("");
+          setEmailReg("");
+          setPasswordReg("");
+          login(emailReg, passwordReg)
+        }
+      } catch (error) {
+        
+      }
+      
     }
-    
-  }
+    }
+  
 
   return (
     <div
@@ -64,14 +77,12 @@ const FormRegister = () => {
 
             {/* FORM */}
             <form
-              class="mt-8 space-y-6"
-              action="http://localhost:3000/auth/register"
-              method="POST"
-              onsubmit={handleSubmit}
+              id="Modal"
             >
               <input type="hidden" name="remember" value="true" />{" "}
               {/* VERIFICAR */}
               <div class="grid grid-cols-2 -space-y-px">
+
                 {/* INSERIR NOME */}
                 <div className="col-span-2 flex flex-row justify-center">
                   <div className="pr-1 py-2 w-full">
@@ -79,9 +90,9 @@ const FormRegister = () => {
                       Olá, como você se chama?
                     </label>
                     <input
+                      onChange={(e) => {setNameReg(e.target.value)}}
                       id="name"
                       name="name"
-                      type="name"
                       required
                       class="shadow-lg appearance-none rounded-md text-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Digite seu nome"
@@ -141,7 +152,7 @@ const FormRegister = () => {
                   </div>
                 </div>
                 <div>
-                  <h3>{errorMessage}</h3>
+                  <p className="text-red-500 pl-1 text-xs">{errorMessage}</p>
                 </div>
               </div>
               <div className="flex justify-center text-slate-300">
@@ -157,7 +168,8 @@ const FormRegister = () => {
               </div>
               <div>
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={(e) => {register(emailReg, passwordReg)}}
                   class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   <span class="absolute left-0 inset-y-0 flex items-center pl-3">

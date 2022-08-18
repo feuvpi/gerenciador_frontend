@@ -10,7 +10,7 @@ const FormAuth = () => {
 // - constantes de estado
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
-const { authenticated, login, user } = useContext(AuthContext);
+const { authenticated, login } = useContext(AuthContext);
 
 Axios.defaults.withCredentials = false;
 
