@@ -4,42 +4,30 @@ import { AuthContext } from '../contexts/auth'
 
 // -- components
 import Navbar from '../components/Navbar.jsx'
+import Operations from '../components/Operations'
+import Assets from '../components/Assets'
 import ModalOperation from '../components/ModalOperation'
 
 // -- utils
 import { handleClose } from '../utils/handleClose'
 
-// -- icons
-import { PencilIcon } from '@heroicons/react/solid'
-
 // -- navigate state
 import { useNavigate } from 'react-router-dom'
 
+// -- requests
 import { getOperations } from '../services/api'
 
-export const Operations = () => {
-  const { user } = useContext(AuthContext)
-  const [operations, setOperations] = useState([])
-  const [loading, setLoading] = useState(true)
+export const Main = () => {
 
-  useEffect(() => {
-    (async () => {
-    console.log("this: " + user.id)
-      const response = await getOperations(user.id)
-      setOperations(response)
-      console.log(response)
-      //setOperations(response.data)
-      setLoading(false)
-    })()
-  }, [])
   // - show state for modal opening/closing
   const [show, setShow] = useState(false)
+  const [buttons, setButtons] = useState(true)
 
   const navigate = useNavigate()
 
-  const handleClick = () => {
-    navigate('/assets')
-  }
+
+
+
 
   /*
   const handleClose = (e) => {
@@ -69,9 +57,26 @@ export const Operations = () => {
 }
 */
 
-  if (loading) {
+ /* if (loading) {
     return <div className='loading'>Carregando dados......</div>
+  } */
+
+  let buttonOperations = document.getElementById("operations");
+  let buttonAssets = document.getElementById("assets");
+
+  const viewOperations = () => {
+    setButtons(true)
+    buttonAssets.disabled = false;
+    buttonOperations.disabled = true;
   }
+
+  const viewAssets = () => {
+    buttonOperations.disabled = false;
+    buttonAssets.disabled = true;
+    setButtons(false);
+  }
+
+  let operations = true;
 
   return (
     <>
@@ -89,15 +94,17 @@ export const Operations = () => {
         <div className='flex justify-center'>
           <div className='inline-flex'>
             <button
-              onClick={handleClick}
-              className='bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l'
-            >
+              onClick={viewAssets}
+              className='bg-slate-300 hover:bg-slate-300 text-gray-800 font-bold hover:text-gray-800 py-2 px-4 focus:outline-none rounded-l disabled:opacity-75'
+              id="assets"
+            > 
               CARTEIRA
             </button>
             <button
-              className='bg-slate-500 hover:bg-slate-500 hover:text-gray-800 text-gray-800 font-bold py-2 px-4 rounded-r focus:outline-none disabled:opacity-75'
-              disabled
-            >
+              id="operations"
+              onClick={viewOperations}
+              className='bg-slate-300 hover:bg-slate-300 hover:text-gray-800 text-gray-800 font-bold py-2 px-4 rounded-r focus:outline-none disabled:opacity-75'
+            > 
               OPERAÇÕES
             </button>
           </div>
@@ -114,6 +121,13 @@ export const Operations = () => {
           >
             +OPERAÇÃO
           </button>
+
+            { buttons ? <Operations/> : <Assets/> }
+  
+          
+
+
+          {/*
           <div className='overflow-x-auto relative rounded-lg'>
             <table className='w-full text-sm text-left text-slate-200'>
               <thead className='text-xs text-gray-700 uppercase bg-indigo-500 dark:text-white'>
@@ -164,7 +178,7 @@ export const Operations = () => {
                 ))}
               </tbody>
             </table>
-          </div>
+                </div>*/}
         </div>
         {show && <ModalOperation id='ModalOperation' show={show} />}
       </div>
@@ -172,6 +186,6 @@ export const Operations = () => {
   )
 }
 
-export default Operations
+export default Main
 
 /*parseDouble(parseFloat(operation.cost) * parseFloat(operations.quantity))}*/
