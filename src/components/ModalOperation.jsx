@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { getOperations, postOperation } from '../services/api';
-import Axios from "axios"
-import { api, createSession} from '../services/api'
-
 import { AuthContext } from '../contexts/auth'
 
 export const Modal = props => {
@@ -14,7 +11,6 @@ export const Modal = props => {
     const [quantity, setQuantity] = useState("");
     const [type, setType] = useState("");
     const [total, setTotal] = useState("")
-    const [operation, setOperation] = useState({});
 
     
     // -- calculating operation total cost
@@ -29,6 +25,7 @@ export const Modal = props => {
         setTotal(e.target.value * cost)
     }
 
+    // -- method for calling the create operation service
     const addOperation = async (e) => {
         //console.log(api.defaults.headers.Authorization)
         const operationData = {
@@ -38,7 +35,6 @@ export const Modal = props => {
             type: type,
             user: user.id
         }
-        setOperation(operationData)
         console.log(operationData)
         //console.log(operation)
         try {
@@ -47,7 +43,6 @@ export const Modal = props => {
             console.log("Operação salva com sucesso!")
             console.log(save)
         }
-        
         } catch (error) {
             console.log(error)
         }

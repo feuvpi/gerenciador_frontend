@@ -51,12 +51,12 @@ const FormRegister = () => {
   return (
     <div
       name="home"
-      className="w-full h-auto md:h-full bg-slate-800 flex flex-col justify-between"
+      className="w-full md:h-screen bg-slate-800 flex flex-col justify-between py-16"
     >
-      <div className="grid max-w-screen-2xl m-auto items-center">
+      <div className="grid max-w-screen-2xl items-center">
         {/* column 1 */}
 
-        <div class="h-auto w-screen flex items-center justify-center py-16 md:py-22 px-4 sm:px-6 lg:px-12">
+        <div class="w-screen flex items-center justify-center px-4 sm:px-6 lg:px-12">
           <div class="max-w-lg w-full space-y-6 border-2 border-indigo-600 rounded-md p-2 shadow-xl bg-slate-900">
             {/* FORM HEADER */}
 
