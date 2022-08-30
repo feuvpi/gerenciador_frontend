@@ -1,17 +1,7 @@
-import React from 'react';
-import AppRoutes from './AppRoutes';
+import React from 'react'
+import AppRoutes from './AppRoutes'
 
-
-function App() {
-
-  return (
-
-  
-      <AppRoutes/>
-  
-
-  );
+function App () {
+  return <AppRoutes className="" />
 }
-export default App;
-
-
+export default App

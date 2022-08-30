@@ -12,10 +12,6 @@ if(localStorage.getItem('user')){
   api.defaults.headers.Authorization = JSON.parse(localStorage.getItem("user")).token
 }
 
-
-
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
