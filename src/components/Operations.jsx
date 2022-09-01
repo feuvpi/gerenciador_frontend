@@ -2,10 +2,9 @@ import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../contexts/auth'
 import { PencilIcon } from '@heroicons/react/solid'
 import { getOperations } from '../services/api'
-import { ModalOperation } from './ModalOperation'
 
 
-const Operations = () => {
+export default function Operations({childrenToParent}) {
 
     const { user } = useContext(AuthContext)
     const [operations, setOperations] = useState([])
@@ -14,14 +13,11 @@ const Operations = () => {
     const [data, setData] = useState({})
 
     const editOperation = (id, symbol) => {
-        setData({
-            id: id,
-            symbol: symbol,
-        })
-        setShow(true);
-
+        //enviar sinal para parent abrir o modal juntamente com data para prenchimento dos campos
 
     }
+
+
 
     useEffect(() => {
         (async () => {
@@ -41,8 +37,6 @@ const Operations = () => {
 
   return (
     <div className='overflow-x-auto overflow-y-visible h-full relative rounded-lg'>
-       <div className='rounded-lg flex justify-middle justify-center align-bottom place-content-bottom'>{show && <ModalOperation className="top-0 absolute" parentToChild={data} id='ModalOperation' show={show} />}</div>
-
             <table className='w-full text-sm text-left text-slate-200 rounded-lg'>
               <thead className='text-xs text-gray-700 uppercase bg-indigo-500 dark:text-white'>
                 <tr className=''>
@@ -89,9 +83,9 @@ const Operations = () => {
                     <td className='py-4 px-6 text-center'>{operation.operationDate}</td>
                     
                     <td className='py-4 px-6 text-center'>
-                      <button onClick={(e) => {editOperation(operation.id, operation.symbol)}} 
+                      <button id="addOperation" onClick={() => childrenToParent(true)} 
                         className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
-                        <PencilIcon className='h-4 text-slate-200' />
+                        <PencilIcon id="addOperation" className='h-4 text-slate-200' />
                       </button>
                     </td>
                   </tr>
@@ -102,4 +96,4 @@ const Operations = () => {
   )
 }
 
-export default Operations
+//export default Operations

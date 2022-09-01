@@ -1,12 +1,11 @@
 // -- react
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // -- components
 import Navbar from '../components/Navbar.jsx'
 import Operations from '../components/Operations'
 import Assets from '../components/Assets'
 import { ModalOperation } from '../components/ModalOperation'
-import { ModalOperation2 } from '../components/ModalOperation2'
 
 // -- utils
 import { handleClose } from '../utils/handleClose'
@@ -16,9 +15,15 @@ export const Main = () => {
   // - show state for modal opening/closing
   const [show, setShow] = useState(false)
   const [buttons, setButtons] = useState(true)
+  const [data, setData] = useState("")
 
   let buttonOperations = document.getElementById("operations");
   let buttonAssets = document.getElementById("assets");
+
+  const childrenToParent = (info) => {
+    console.log(show)
+    setShow(info)
+  }
 
   const viewOperations = () => {
     setButtons(true)
@@ -28,6 +33,7 @@ export const Main = () => {
 
   const viewAssets = () => {
     buttonOperations.disabled = false;
+    console.log(show)
     buttonAssets.disabled = true;
     setButtons(false);
   }
@@ -97,10 +103,10 @@ export const Main = () => {
   </div>
 </div>
 
-            { buttons ? <Operations/> : <Assets/> }      
+            { buttons ? <Operations childrenToParent={childrenToParent} /> : <Assets/> }      
 
         </div>
-        {show && <ModalOperation2 id='ModalOperation' show={show} />}
+        {show && <ModalOperation id='ModalOperation' show={show}/>}
       </div>
     </>
   )
