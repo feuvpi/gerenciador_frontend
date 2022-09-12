@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
 
       // -- login handle
       const login = async (email, password) => {
-        console.log('requesting authorization... credentials: ' + {email, password});
+        console.log('requesting authorization... credentials: ' + email + " " + password);
         const response = await createSession(email, password)
         console.log(response.data)
 

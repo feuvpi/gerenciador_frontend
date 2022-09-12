@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { getOperations, postOperation } from '../services/api';
+import { getOperations, postOperation, updateOperation } from '../services/api';
 import { AuthContext } from '../contexts/auth'
 
 export const ModalOperation = props => {
 
+    console.log(props.symbol)
+    console.log(props.show)
+
     // -- states
     const { user } = useContext(AuthContext)
-    const [symbol, setSymbol] = useState("");
-    const [cost, setCost] = useState("");
-    const [quantity, setQuantity] = useState("");
+    const [symbol, setSymbol] = useState(props.symbol);
+    const [cost, setCost] = useState(props.cost);
+    const [quantity, setQuantity] = useState(props.quantity);
     const [type, setType] = useState("");
-    const [total, setTotal] = useState("")
+    const [total, setTotal] = useState((props.quantity)*(props.cost))
 
     
     // -- calculating operation total cost
@@ -25,6 +28,20 @@ export const ModalOperation = props => {
         setTotal(e.target.value * cost)
     }
 
+    // -- handling select value
+    const handleSelect = () => {
+
+    }
+
+    // -- handleSubmit
+    const handleSubmit = () => {
+        if(props.edit == true){
+
+        } else {
+
+        }
+    }
+
     // -- method for calling the create operation service
     const addOperation = async (e) => {
         //console.log(api.defaults.headers.Authorization)
@@ -37,16 +54,40 @@ export const ModalOperation = props => {
         }
         console.log(operationData)
         //console.log(operation)
-        try {
-        const save = await postOperation(operationData)
-        if(save){
-            console.log("Operação salva com sucesso!")
-            console.log(save)
-        }
-        } catch (error) {
-            console.log(error)
+
+        // caso seja uma operação de atualização
+        if(props.edit === true){
+            operationData._id = props.parentId;
+            try {
+                const save = await updateOperation(operationData)
+                if (save){
+                    console.log("Operação atualizada com sucesso!")
+                    console.log(save)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+
+
+        // caso seja a criação de uma nova operação
+        } else {
+            try {
+                const save = await postOperation(operationData)
+                if(save){
+                    console.log("Operação salva com sucesso!")
+                    console.log(save)
+                }
+                } catch (error) {
+                    console.log(error)
+                }
+
         }
     }
+
+    // // -- method for edit operation
+    // const editOperation = async (e) = {
+
+    // }
 
     //api.defaults.headers.Authorization = user.token
     //console.log(api.defaults.headers.Authorization)
@@ -63,12 +104,13 @@ export const ModalOperation = props => {
                 </div>
                 <div id="Modal" className="modal-body">
                     <form id="Modal" className="flex flex-col px-2">
+                        <input value={props.parentId} type="text" name="id" hidden/>
                         <label id="Modal" className="pt-2 text-indigo-700 font-semibold">CÓDIGO:</label>
-                        <input id="Modal" onChange={(e) => {setSymbol(e.target.value)}} className="border-2 border-black rounded-md" type="string" name="symbol" placeholder="CÓDIGO" required/>
+                        <input id="Modal" value={symbol} onChange={(e) => {setSymbol(e.target.value)}} className="border-2 border-black rounded-md" type="string" name="symbol" placeholder="CÓDIGO" required/>
                         <label id="Modal" className="pt-2  text-indigo-700 font-semibold">PREÇO:</label>
-                        <input id="Modal" onChange={(e) => {calc1(e)}} className="border-2 border-black rounded-md" type="text" name="cost" placeholder="PREÇO" required/>
+                        <input id="Modal" value={cost} onChange={(e) => {calc1(e)}} className="border-2 border-black rounded-md" type="text" name="cost" placeholder="PREÇO" required/>
                         <label id="Modal" className="pt-2  text-indigo-700 font-semibold">QUANTIDADE:</label>
-                        <input id="Modal" onChange={(e) => {calc2(e)}} className="border-2 border-black rounded-md" type="number" name="quantity" placeholder="QUANTIDADE" required/>
+                        <input id="Modal" value={quantity} onChange={(e) => {calc2(e)}} className="border-2 border-black rounded-md" type="number" name="quantity" placeholder="QUANTIDADE" required/>
                         <label id="Modal" className="pt-2 text-indigo-700 font-semibold">TIPO DE OPERAÇÃO:</label>
                         <select onChange={(e) => {setType(e.target.value)}} id="Modal" className="border-2 rounded-md border-black">
                             <option selected="true" disabled="disabled">TIPO DE OPERAÇÃO</option>

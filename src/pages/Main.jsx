@@ -17,12 +17,26 @@ export const Main = () => {
   const [buttons, setButtons] = useState(true)
   const [data, setData] = useState("")
 
+  const [parentId, setParentId] = useState("")
+  const [parentSymbol, setParentSymbol] = useState("")
+  const [parentCost, setParentCost] = useState("")
+  const [parentQuantity, setParentQuantity] = useState("")
+  const [parentType, setParentType] = useState("")
+  const [editing, setEditing] = useState("");
+
   let buttonOperations = document.getElementById("operations");
   let buttonAssets = document.getElementById("assets");
 
-  const childrenToParent = (info) => {
-    console.log(show)
-    setShow(info)
+  const childrenToParent = (pass, id, symbol, type, cost, quantity, operationDate) => {
+    console.log(symbol)
+    console.log(id)
+    setEditing(pass);
+    setParentId(id)
+    setParentSymbol(symbol)
+    setParentType(type)
+    setParentCost(cost)
+    setParentQuantity(quantity)
+    setShow(pass)
   }
 
   const viewOperations = () => {
@@ -74,6 +88,11 @@ export const Main = () => {
         <div className='w-full h-5/6 flex flex-col pt-4 px-0.5 md:px-8 rounded-lg'>
           <button
             onClick={() => {
+              setParentId(null)
+              setParentCost(null)
+              setParentQuantity(null)
+              setParentSymbol(null)
+              setEditing(false)
               setShow(true)
             }}
             id='addOperation'
@@ -106,7 +125,7 @@ export const Main = () => {
             { buttons ? <Operations childrenToParent={childrenToParent} /> : <Assets/> }      
 
         </div>
-        {show && <ModalOperation id='ModalOperation' show={show}/>}
+        {show && <ModalOperation id='ModalOperation' show={show} parentId={parentId} symbol={parentSymbol} cost={parentCost} quantity={parentQuantity} edit={editing}/>}
       </div>
     </>
   )

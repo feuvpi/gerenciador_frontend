@@ -11,12 +11,12 @@ export default function Operations({childrenToParent}) {
     const [loading, setLoading] = useState(true)
     const [show, setShow] = useState(false)
     const [data, setData] = useState({})
+    const pass = true;
 
     const editOperation = (id, symbol) => {
         //enviar sinal para parent abrir o modal juntamente com data para prenchimento dos campos
 
     }
-
 
 
     useEffect(() => {
@@ -69,7 +69,7 @@ export default function Operations({childrenToParent}) {
               <tbody className='rounded-lg'>
                 {operations.map((operation) => (
                   <tr className='bg-slate-400 dark:border-gray-700 hover:bg-slate-500 rounded-md'>
-                    <td className='py-4 px-6 text-center' value={operation.id} hidden>{operation.id}</td>
+                    <td className='py-4 px-6 text-center' value={operation._id} hidden>{operation._id}</td>
                     <td
                       scope='row'
                       className='py-4 px-6 font-medium text-slate-200 whitespace-nowrap'
@@ -82,10 +82,10 @@ export default function Operations({childrenToParent}) {
                     <td className='py-4 px-6 text-center'>{parseFloat(operation.cost*operation.quantity)}</td>
                     <td className='py-4 px-6 text-center'>{operation.operationDate}</td>
                     
-                    <td className='py-4 px-6 text-center'>
-                      <button id="addOperation" onClick={() => childrenToParent(true)} 
+                    <td id="addOperation" className='py-4 px-6 text-center'>
+                      <button id="addOperation" onClick={() => childrenToParent(pass, operation._id, operation.symbol, operation.type, operation.cost, operation.quantity, operation.operationDate)} 
                         className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
-                        <PencilIcon id="addOperation" className='h-4 text-slate-200' />
+                        <PencilIcon id="addOperation"  className='h-4 text-slate-200' />
                       </button>
                     </td>
                   </tr>

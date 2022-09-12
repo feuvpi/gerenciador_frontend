@@ -7,6 +7,7 @@ import React, { useState } from "react";
     }
     if(e.target.id !== "addOperation"){
         if(!show){
+            console.log(e.target.id)
             return false
         } else{
             return null

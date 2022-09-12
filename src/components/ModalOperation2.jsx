@@ -6,7 +6,7 @@ export const ModalOperation2 = props => {
 
     // -- states
     const { user } = useContext(AuthContext)
-    const [symbol, setSymbol] = useState("");
+    const [symbol, setSymbol] = useState(props.parentSymbol);
     const [cost, setCost] = useState("");
     const [quantity, setQuantity] = useState("");
     const [type, setType] = useState("");

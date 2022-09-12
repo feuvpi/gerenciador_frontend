@@ -3,6 +3,8 @@ const config = require('../config.json')
 
 const BASE_URL= config.API_URL || 'http://localhost:3000'
 
+//const BASE_URL = 'http://localhost:3000'
+
 
 export const api = axios.create({
     //baseURL: "https://gestorportfolio-backend.herokuapp.com/",
@@ -51,18 +53,38 @@ export const postOperation = async(operation) => {
     } catch (err) {
         if(err.response){
             console.log(err.response.status);
-            console.log(err.response.data);
-            console.log(err.response.headers)
         } else if (err.request){
             console.log(err.request.status)
-            console.log(err.request.data)
-            console.log(err)
         }
         }
         
     }
 
+// -- requisição para atualizar uma Operação
+export const updateOperation = async(operation) => {
+    console.log("updating...:")
+    console.log(operation)
+    console.log("------------------------------------")
 
+    try {
+        const res = await api.put('/operations/operation', {
+            _id: operation._id,
+            symbol: operation.symbol,
+            cost: operation.cost,
+            quantity: operation.quantity,
+            type: operation.type,
+            user: operation.user
+        })
+        console.log(res)
+    } catch (err) {
+        if(err.response){
+            console.log(err.response.status);
+        } else if (err.request){
+            console.log(err.request.status)
+        }
+        }
+        
+    }
 
 /*  \
 
