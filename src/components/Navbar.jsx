@@ -1,14 +1,5 @@
 import React, { useState, useContext } from 'react'
 import { MenuIcon, XIcon, ChartBarIcon } from '@heroicons/react/outline'
-import {
-  Link as LinkScroll,
-  Button,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller
-} from 'react-scroll'
 import { Link } from 'react-router-dom'
 import { AuthContext } from "../contexts/auth";
 import ModalPerfil from '../components/ModalPerfil';
@@ -17,6 +8,17 @@ import ModalPerfil from '../components/ModalPerfil';
 import { handleClose } from "../utils/handleClose";
 
 const Navbar = () => {
+
+  
+
+  const userSession = () => {
+
+  }
+
+  const { user } = useContext(AuthContext)
+
+  console.log('user id at navbar:')
+  console.log(user._id)
   
   const { logout } = useContext(AuthContext)
   const [nav, setNav] = useState(false) //AppBar state
@@ -31,7 +33,6 @@ const Navbar = () => {
     //if(event.target.id !== 'openModal'){
       if(show === true && event.target.id !== 'modal' && event.target.id !== 'openModal'){
         setShow(false)
-        console.log(event.target.id)
       }
     
     
@@ -50,7 +51,7 @@ const Navbar = () => {
         <div className='flex hidden md:flex pr-4 items-center self-center'>
             <button id='openModal' onClick={() => {if(!show){setShow(true)} else {setShow(false); setShow(false)}}} className='flex bg-zinc-100 text-indigo-700 hover:bg-zinc-300 w-16 h-8 text-sm inline-flex place-content-center place-items-center'>PERFIL1</button>
             <button onClick={logout} className="bg-zinc-100 text-indigo-700 hover:bg-zinc-300 inline-flex h-8 text-sm w-16 place-content-center place-items-center">SAIR</button>
-            <ModalPerfil show={show}/>
+            <ModalPerfil show={show} name={user.name} email={user.email} id={user._id}/>
         </div>
         {/* Collapsable Menu */}
         <div className='md:hidden mr-4' onClick={handleClick}>
@@ -68,12 +69,11 @@ const Navbar = () => {
         }
       >
         <div id="onClose" className='flex flex-col py-2'>
-          <button onClick={() => {setShow(true)}} className="w-22">PERFIL</button>
+          <button id='openModal' onClick={() => {if(!show){setShow(true)} else {setShow(false); setShow(false)}}} className="w-22">PERFIL</button>
           <button onClick={logout}>SAIR</button>
-          
         </div>
       </ul>
-      {show && <ModalPerfil id="modal" show={show} />}
+      {show && <ModalPerfil show={show} name={user.name} email={user.email} id={user._id}/>}
     </div>
   )
 }

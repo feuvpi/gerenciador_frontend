@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { getOperations, postOperation, updateOperation } from '../services/api';
+import React, { useState, useContext } from 'react';
+import { postOperation, updateOperation } from '../services/api';
 import { AuthContext } from '../contexts/auth'
 
 export const ModalOperation = props => {
-
-    console.log(props.symbol)
-    console.log(props.show)
 
     // -- states
     const { user } = useContext(AuthContext)

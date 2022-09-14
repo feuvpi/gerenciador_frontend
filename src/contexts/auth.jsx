@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Axios from 'axios';
 import { api, createSession} from '../services/api'
 
 // -- export AuthContext
@@ -36,7 +35,8 @@ export const AuthProvider = ({ children }) => {
             return null;
         } else {
             const loggedUser = {
-                id: response.data.user._id,
+                name: response.data.user.name,
+                _id: response.data.user._id,
                 email: response.data.user.email,
                 token: `Bearer ${response.data.token}`
             }

@@ -4,10 +4,14 @@ import { MenuIcon, XIcon, ChartBarIcon } from '@heroicons/react/outline'
 
 export const Modal = props => {
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
+    const [name, setName] = useState(props.name);
+    const [email, setEmail] = useState(props.email);
     const [oldPassword, setOldPassword] = useState("");
     const [password, setPassword] = useState("");
+    //const [userId, setUserId] = (props.id);
+
+    console.log('name at modalPerfil:')
+    console.log(name)
 
     if(!props.show){
         return null;
@@ -27,13 +31,16 @@ export const Modal = props => {
                 </div>
                 <div id="modal" className="modal-body">
                     <form id="modal" className="flex flex-col px-2">
+                        <input value={props.id} type="modal" name='_id' hidden/>
                         <label id="modal" className="pt-2 text-indigo-700 font-semibold">NOME:</label>
-                        <input id="modal" onChange={(e) => {setName(e.value.target)}} className="border-2 border-black rounded-md" type="string" name="name" placeholder="Nome" required/>
+                        <input id="modal" value={name} onChange={(e) => {setName(e.value.target)}} className="border-2 border-black rounded-md" type="string" name="name" placeholder="Nome" required/>
                         <label id="modal" className="pt-2  text-indigo-700 font-semibold">EMAIL:</label>
-                        <input id="modal" onChange={(e) => {setEmail(e.value.target)}} className="border-2 border-black rounded-md" type="text" name="email" placeholder="E-mail" required/>
+                        <input id="modal" value={email} onChange={(e) => {setEmail(e.value.target)}} className="border-2 border-black rounded-md" type="text" name="email" placeholder="E-mail" required/>
                         <label id="modal" className="pt-2  text-indigo-700 font-semibold">SENHA ATUAL:</label>
                         <input id="modal" onChange={(e) => {setOldPassword(e.value.target)}} className="border-2 border-black rounded-md" type="number" name="oldpassword" placeholder="Senha Atual" required/>
                         <label id="modal" className="pt-2 text-indigo-700 font-semibold">NOVA SENHA:</label>
+                        <input id="modal" onChange={(e) => {setPassword(e.value.target)}} className="border-2 border-black rounded-md" type="number" name="password" placeholder="Nova Senha" required/>
+                        <label id="modal" className="pt-2 text-indigo-700 font-semibold">CONFIRME A NOVA SENHA:</label>
                         <input id="modal" onChange={(e) => {setPassword(e.value.target)}} className="border-2 border-black rounded-md" type="number" name="password" placeholder="Nova Senha" required/>
                         <button id="modal" className="mt-6">SALVAR</button>
                     </form>
