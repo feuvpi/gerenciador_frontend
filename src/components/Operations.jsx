@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../contexts/auth'
-import { PencilIcon } from '@heroicons/react/solid'
+import { PencilIcon, XIcon } from '@heroicons/react/solid'
 import { getOperations } from '../services/api'
 
 
@@ -64,6 +64,9 @@ export default function Operations({childrenToParent}) {
                   <th scope='col' className='py-3 px-6 text-center'>
                     EDITAR
                   </th>
+                  <th scope='col' className='py-3 px-6 text-center'>
+                    DELETAR
+                  </th>
                 </tr>
               </thead>
               <tbody className='rounded-lg'>
@@ -86,6 +89,12 @@ export default function Operations({childrenToParent}) {
                       <button id="addOperation" onClick={() => childrenToParent(pass, operation._id, operation.symbol, operation.type, operation.cost, operation.quantity, operation.operationDate)} 
                         className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
                         <PencilIcon id="addOperation"  className='h-4 text-slate-200' />
+                      </button>
+                    </td>
+                    <td id="addOperation" className='py-4 px-6 text-center'>
+                      <button id="addOperation" onClick={() => childrenToParent(pass, operation._id, operation.symbol, operation.type, operation.cost, operation.quantity, operation.operationDate)} 
+                        className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
+                        <XIcon id="addOperation"  className='h-4 text-slate-200' />
                       </button>
                     </td>
                   </tr>
