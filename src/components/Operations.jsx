@@ -80,9 +80,9 @@ export default function Operations({childrenToParent}) {
                       {operation.symbol}
                     </td>
                     <td className='py-4 px-6 text-center'>{operation.type}</td>
-                    <td className='py-4 px-6 text-center'>{operation.cost}</td>
+                    <td className='py-4 px-6 text-center'>R${operation.cost}</td>
                     <td className='py-4 px-6 text-center'>{operation.quantity}</td>
-                    <td className='py-4 px-6 text-center'>{parseFloat(operation.cost*operation.quantity)}</td>
+                    <td className='py-4 px-6 text-center'>R${parseFloat(operation.cost*operation.quantity)}</td>
                     <td className='py-4 px-6 text-center'>{operation.operationDate}</td>
                     
                     <td id="addOperation" className='py-4 px-6 text-center'>
