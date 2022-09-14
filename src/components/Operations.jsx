@@ -13,16 +13,10 @@ export default function Operations({childrenToParent}) {
     const [data, setData] = useState({})
     const pass = true;
 
-    const editOperation = (id, symbol) => {
-        //enviar sinal para parent abrir o modal juntamente com data para prenchimento dos campos
-
-    }
-
-
     useEffect(() => {
         (async () => {
-        console.log("this: " + user.id)
-          const response = await getOperations(user.id)
+        console.log("this: " + user._id)
+          const response = await getOperations(user._id)
           setOperations(response)
           console.log(response)
           //setOperations(response.data)
