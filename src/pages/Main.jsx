@@ -24,8 +24,8 @@ export const Main = () => {
   const [parentType, setParentType] = useState("")
   const [editing, setEditing] = useState("");
 
-  let buttonOperations = document.getElementById("operations");
-  let buttonAssets = document.getElementById("assets");
+  const buttonOperations = document.getElementById("operations");
+  const buttonAssets = document.getElementById("assets");
 
   const childrenToParent = (pass, id, symbol, type, cost, quantity, operationDate) => {
     console.log(symbol)

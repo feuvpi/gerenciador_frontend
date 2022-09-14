@@ -92,7 +92,7 @@ export default function Operations({childrenToParent}) {
                       </button>
                     </td>
                     <td id="addOperation" className='py-4 px-6 text-center'>
-                      <button id="addOperation" onClick={() => childrenToParent(pass, operation._id, operation.symbol, operation.type, operation.cost, operation.quantity, operation.operationDate)} 
+                      <button id="addOperation"
                         className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
                         <XIcon id="addOperation"  className='h-4 text-slate-200' />
                       </button>
