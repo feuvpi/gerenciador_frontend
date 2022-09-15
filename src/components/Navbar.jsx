@@ -28,6 +28,10 @@ const Navbar = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setNav(!nav)
 
+  // const modalPerfilToNav = (show) => {
+  //   console.log(show)
+  // }
+
 
   document.addEventListener('click', function(event){
     //if(event.target.id !== 'openModal'){

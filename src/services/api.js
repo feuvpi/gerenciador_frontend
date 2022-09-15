@@ -5,22 +5,32 @@ const config = require('../config.json')
 
 const BASE_URL = 'http://localhost:3000'
 
-
+//configurando a URL base do Axios
 export const api = axios.create({
     //baseURL: "https://gestorportfolio-backend.herokuapp.com/",
     baseURL: BASE_URL,
 });
 
-// -- requisição para criação de usuário --
-export const createUser = async (name, email, password) => {
-    return api.post('/auth/register', { name, email, password });
+// - Serviços relacionados ao User Model
+
+    // -- requisição para criação de usuário --
+    export const createUser = async (name, email, password, _id) => {
+        return api.post('/auth/register', { name, email, password, _id });
+        }
+
+    // -- requisição para autenticação
+    export const createSession = async (email, password) => {
+        console.log(BASE_URL)
+        return api.post('/auth/authenticate', { email, password });
     }
 
-// -- requisição para autenticação
-export const createSession = async (email, password) => {
-    console.log(BASE_URL)
-    return api.post('/auth/authenticate', { email, password });
-}
+    // -- requisição para edição de dados do usuario
+    export const editUser = async(name, email, oldPassword, password, _id) => {
+        return api.post('/auth/user', { name, email, oldPassword, password, _id})
+    }
+
+
+// serviços relacionados ao Model Operações
 
 // -- requisição para buscar (GET) todas as operações salvas por um determinado usuario
 export const getOperations = async (user) => {

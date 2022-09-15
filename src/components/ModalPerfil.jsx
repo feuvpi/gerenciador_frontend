@@ -1,21 +1,47 @@
 import React, { useState, useContext } from 'react';
-
-import { MenuIcon, XIcon, ChartBarIcon } from '@heroicons/react/outline'
+import { AuthContext } from "../contexts/auth";
+import { editUser } from '../services/api';
+import { XIcon } from '@heroicons/react/outline'
 
 export const Modal = props => {
+
+    const { user } = useContext(AuthContext)
 
     const [name, setName] = useState(props.name);
     const [email, setEmail] = useState(props.email);
     const [oldPassword, setOldPassword] = useState("");
-    const [password, setPassword] = useState("");
-    //const [userId, setUserId] = (props.id);
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [statusMessage, setStatusMessage] = useState('teste');
+    const _id = props.id
 
-    console.log('name at modalPerfil:')
-    console.log(name)
+    const handleSubmit = async () => {
+        if(newPassword !== confirmPassword){
+            setStatusMessage('As senhas não conferem!');
+            return;
+        }
+        let password = newPassword
+        if(newPassword === ""){
+            password = oldPassword
+        }
+        const edit = await editUser(name, email, oldPassword, password, _id)
+        if(edit.data.message === 'Senha antiga não confere'){
+            setStatusMessage(edit.data.message)
+            return
+        }
+        console.log(edit.data.message)
+        user.name = name;
+        user.email = email;
+        setStatusMessage(edit.data.message)
+        // modalPerfilToNav(false)
+
+    }
 
     if(!props.show){
         return null;
     }
+
+
 
     
     //document.querySelector('.modal').style.display = 'none'
@@ -31,18 +57,18 @@ export const Modal = props => {
                 </div>
                 <div id="modal" className="modal-body">
                     <form id="modal" className="flex flex-col px-2">
-                        <input value={props.id} type="modal" name='_id' hidden/>
                         <label id="modal" className="pt-2 text-indigo-700 font-semibold">NOME:</label>
-                        <input id="modal" value={name} onChange={(e) => {setName(e.value.target)}} className="border-2 border-black rounded-md" type="string" name="name" placeholder="Nome" required/>
+                        <input id="modal" value={name} onChange={(e) => {setName(e.target.value)}} className="border-2 border-black rounded-md" type="string" name="name" placeholder="Nome" required/>
                         <label id="modal" className="pt-2  text-indigo-700 font-semibold">EMAIL:</label>
-                        <input id="modal" value={email} onChange={(e) => {setEmail(e.value.target)}} className="border-2 border-black rounded-md" type="text" name="email" placeholder="E-mail" required/>
+                        <input id="modal" value={email} onChange={(e) => {setEmail(e.target.value)}} className="border-2 border-black rounded-md" type="text" name="email" placeholder="E-mail" required/>
                         <label id="modal" className="pt-2  text-indigo-700 font-semibold">SENHA ATUAL:</label>
-                        <input id="modal" onChange={(e) => {setOldPassword(e.value.target)}} className="border-2 border-black rounded-md" type="number" name="oldpassword" placeholder="Senha Atual" required/>
+                        <input id="modal" onChange={(e) => {setOldPassword(e.target.value)}} className="border-2 border-black rounded-md" type="text" name="oldPassword" placeholder="Senha Atual" required/>
                         <label id="modal" className="pt-2 text-indigo-700 font-semibold">NOVA SENHA:</label>
-                        <input id="modal" onChange={(e) => {setPassword(e.value.target)}} className="border-2 border-black rounded-md" type="number" name="password" placeholder="Nova Senha" required/>
+                        <input id="modal" onChange={(e) => {setNewPassword(e.target.value)}} className="border-2 border-black rounded-md" type="text" name="password" placeholder="Nova Senha" required/>
                         <label id="modal" className="pt-2 text-indigo-700 font-semibold">CONFIRME A NOVA SENHA:</label>
-                        <input id="modal" onChange={(e) => {setPassword(e.value.target)}} className="border-2 border-black rounded-md" type="number" name="password" placeholder="Nova Senha" required/>
-                        <button id="modal" className="mt-6">SALVAR</button>
+                        <input id="modal" onChange={(e) => {setConfirmPassword(e.target.value)}} className="border-2 border-black rounded-md" type="text" name="password" placeholder="Nova Senha" required/>
+                        <p>{statusMessage}</p>
+                        <button type="button" id="modal" onClick={handleSubmit} className="mt-6">SALVAR</button>
                     </form>
                 </div>
             </div>

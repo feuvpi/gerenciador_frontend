@@ -40,7 +40,7 @@ export const ModalOperation = props => {
     }
 
     // -- method for calling the create operation service
-    const addOperation = async (e) => {
+    const addOperation = async () => {
         //console.log(api.defaults.headers.Authorization)
         const operationData = {
             symbol: symbol,
