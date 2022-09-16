@@ -9,19 +9,19 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/feuvpi/gerenciador_frontend?style=plastic)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/feuvpi/gerenciador_frontend?style=plastic)
 
-<img src="" alt="exemplo imagem">
+<img src="https://github.com/feuvpi/gerenciador_frontend/blob/main/public/printscreen/home.png?raw=true" alt="exemplo imagem">
 
-> Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
+Aplicação para registro de operações de compra e venda de ativos financeiros e acompanhamento em tempo real.
 
 ### Ajustes e melhorias
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [x] Tarefa 1
-- [x] Tarefa 2
-- [x] Tarefa 3
-- [ ] Tarefa 4
-- [ ] Tarefa 5
+- [X] Botão para edição de operação
+- [ ] Aba de Carteira mostrando o resumo de cada ativo, com informações atualizadas do preço do ativo, preço médio e rendimento total
+- [ ] Implementação de grafico geral (tempo,preço) demonstrando o desempenho da carteira de ativos
+- [ ] Implementação de grafico (tempo,preço) individual por ativo, acionados a partir do click na respectiva linha.
+- [ ] Atualização da interface dos modais de operação e perfil
 
 ## 💻 Pré-requisitos
 
@@ -31,31 +31,36 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 * Você tem uma máquina `<Windows / Linux / Mac>`. Indique qual sistema operacional é compatível / não compatível.
 * Você leu `<guia / link / documentação_relacionada_ao_projeto>`.
 
-## 🚀 Instalando <nome_do_projeto>
+## 🚀 Instalando esse projeto:
 
-Para instalar o <nome_do_projeto>, siga estas etapas:
+Para instalar o App, siga estas etapas:
 
-Linux e macOS:
+Para instalar as dependencias do projeto:
 ```
-<comando_de_instalação>
-```
-
-Windows:
-```
-<comando_de_instalação>
+npm install
 ```
 
-## ☕ Usando <nome_do_projeto>
-
-Para usar <nome_do_projeto>, siga estas etapas:
-
-```
-<exemplo_de_uso>
+Instalar apenas as dependencias de produção:
+```bash
+npm install --production
 ```
 
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
+## ☕ Usando a aplicação:
 
-## 📫 Contribuindo para <nome_do_projeto>
+#### `npm start`
+
+Roda o app em modo de desenvolvimento.
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+A pagina irá recarregar sempre que uma mudança for salva.
+Em casos de erros verifique o console.
+
+#### `npm run build`
+
+Compila o aplicativo para produção na pasta `build`.
+Ele agrupa corretamente o React no modo de produção e otimiza a compilação para o melhor desempenho.
+
+## 📫 Contribuindo para  este projeto:
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
 Para contribuir com <nome_do_projeto>, siga estas etapas:
 
@@ -103,7 +108,9 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
 ## 😄 Seja um dos contribuidores<br>
 
-Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contribuir.
+Pull requests são bem-vindos. Para mudanças muito grandes é uma boa pratica abrir um isse para que as mudanças sugeridas possam ser discutidas.
+
+Lembre-se de atualizar os testes! ;)
 
 ## 📝 Licença
 
@@ -118,87 +125,3 @@ Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-------------------------------------------
-
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
