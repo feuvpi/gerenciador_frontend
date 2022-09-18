@@ -16,9 +16,6 @@ const Navbar = () => {
   }
 
   const { user } = useContext(AuthContext)
-
-  console.log('user id at navbar:')
-  console.log(user._id)
   
   const { logout } = useContext(AuthContext)
   const [nav, setNav] = useState(false) //AppBar state

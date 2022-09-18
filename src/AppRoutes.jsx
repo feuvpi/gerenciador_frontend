@@ -34,7 +34,7 @@ const AppRoutes = () => {
             <Routes>
                 <Route path="/" element={<FormAuth/>}/>
                 <Route path="/register" element={<FormRegister/>}/>
-                <Route path="/operations" element={<Private><Main/></Private>}/>
+                <Route path="/main" element={<Private><Main/></Private>}/>
                 
             </Routes>
     </AuthProvider>

@@ -48,9 +48,6 @@ export const getOperations = async (user) => {
 
 // -- requisição para criação de nova operação
 export const postOperation = async(operation) => {
-    console.log("submiting:")
-    console.log(operation)
-    console.log("------------------------------------")
 
     try {
         const res = await api.post('/operations/operation', {
@@ -72,9 +69,6 @@ export const postOperation = async(operation) => {
 
 // -- requisição para atualizar uma Operação
 export const updateOperation = async(operation) => {
-    console.log("updating...:")
-    console.log(operation)
-    console.log("------------------------------------")
 
     try {
         const res = await api.put('/operations/operation', {
@@ -95,6 +89,19 @@ export const updateOperation = async(operation) => {
         }
         
     }
+
+// -- requisção para deletar uma operação
+export const deleteOperation = async(id) => {
+    
+    try {
+        console.log(id)
+        const res = await api.delete(`/operations/operation/${id}`)
+        console.log(res)
+        return res
+    } catch (error) {
+        console.log(error.response.message)
+    }
+}
 
 /*  \
 

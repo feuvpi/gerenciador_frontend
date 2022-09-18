@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../contexts/auth'
 import { PencilIcon, XIcon } from '@heroicons/react/solid'
-import { getOperations } from '../services/api'
+import { getOperations, deleteOperation } from '../services/api'
 
 
 export default function Operations({childrenToParent}) {
@@ -15,14 +15,18 @@ export default function Operations({childrenToParent}) {
 
     useEffect(() => {
         (async () => {
-        console.log("this: " + user._id)
           const response = await getOperations(user._id)
           setOperations(response)
-          console.log(response)
           //setOperations(response.data)
           setLoading(false)
         })()
       }, [])
+
+      const handleDelete = (id) => {
+        deleteOperation(id)
+        const updated = operations.filter(u => u._id !== id)
+        setOperations(updated)
+      }
 
 
     if (loading) {
@@ -79,16 +83,16 @@ export default function Operations({childrenToParent}) {
                     <td className='py-4 px-6 text-center'>R${parseFloat(operation.cost*operation.quantity)}</td>
                     <td className='py-4 px-6 text-center'>{operation.operationDate}</td>
                     
-                    <td id="addOperation" className='py-4 px-6 text-center'>
-                      <button id="addOperation" onClick={() => childrenToParent(pass, operation._id, operation.symbol, operation.type, operation.cost, operation.quantity, operation.operationDate)} 
+                    <td id="editOperation" className='py-4 px-6 text-center'>
+                      <button id="editOperation" onClick={() => childrenToParent(pass, operation._id, operation.symbol, operation.type, operation.cost, operation.quantity, operation.operationDate)} 
                         className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
-                        <PencilIcon id="addOperation"  className='h-4 text-slate-200' />
+                        <PencilIcon id="editOperation"  className='h-4 text-slate-200' />
                       </button>
                     </td>
-                    <td id="addOperation" className='py-4 px-6 text-center'>
-                      <button id="addOperation"
+                    <td id="deleteOperation" className='py-4 px-6 text-center'>
+                      <button id="deleteOperation" onClick={() => handleDelete(operation._id)}
                         className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
-                        <XIcon id="addOperation"  className='h-4 text-slate-200' />
+                        <XIcon id="deleteOperation"  className='h-4 text-slate-200' />
                       </button>
                     </td>
                   </tr>

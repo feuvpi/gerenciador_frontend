@@ -1,5 +1,5 @@
 // -- react
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 // -- components
 import Navbar from '../components/Navbar.jsx'
@@ -88,12 +88,14 @@ export const Main = () => {
         <div className='w-full h-5/6 flex flex-col pt-4 px-0.5 md:px-8 rounded-lg'>
           <button
             onClick={() => {
+              console.log(show)
               setParentId(null)
               setParentCost(null)
               setParentQuantity(null)
               setParentSymbol(null)
               setEditing(false)
               setShow(true)
+              
             }}
             id='addOperation'
             data-bs-toggle="modalOperation2" data-bs-target="#exampleModalLg"

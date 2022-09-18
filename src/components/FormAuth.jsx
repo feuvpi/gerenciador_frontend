@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import bgTransaction from "../assets/undraw_investment_data_re_sh9x.svg";
 import Axios from "axios"
 import { AuthContext } from "../contexts/auth"
@@ -7,18 +8,35 @@ import { AuthContext } from "../contexts/auth"
 
 const FormAuth = () => {
 
+const navigate = useNavigate();
+
 // - constantes de estado
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const { authenticated, login } = useContext(AuthContext);
+const [statusMessage, setStatusMessage] = useState('');
 
 Axios.defaults.withCredentials = false;
 
 // - função para processar o login
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
-  login(email, password);
+
+  try {
+    const session = await login(email, password);
+    if(session.data.error){
+      setStatusMessage(session.data.error)
+    }
+    
+  } catch (error) {
+    console.log(error)
+  }
+  
 };
+
+if(authenticated === true){
+  navigate('/main')
+}
 
   return (
     <div
@@ -57,9 +75,10 @@ const handleSubmit = (e) => {
 
 
 
-            <p>{String(authenticated)}</p>
+            
             {/* --- form para login --- */} 
             <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+            <p className="text-red-400">{String(statusMessage)}</p>
               <input type="hidden" name="remember" value="true" />
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>

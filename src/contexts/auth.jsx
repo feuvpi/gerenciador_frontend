@@ -26,13 +26,12 @@ export const AuthProvider = ({ children }) => {
 
       // -- login handle
       const login = async (email, password) => {
-        console.log('requesting authorization... credentials: ' + email + " " + password);
+        let statusMessage = '';
         const response = await createSession(email, password)
-        console.log(response.data)
-
         if(!response.data.user){
-            console.log('authentication error')
-            return null;
+            //console.log('authentication error')
+            //statusMessage = { status: false, message:'Credenciais de autenticação invalida. Verifique seu e-mail e sua senha.'}
+            return response;
         } else {
             const loggedUser = {
                 name: response.data.user.name,
@@ -43,8 +42,7 @@ export const AuthProvider = ({ children }) => {
             setUser(loggedUser);
             api.defaults.headers.Authorization = loggedUser.token
             localStorage.setItem('user', JSON.stringify(loggedUser))
-            navigate('/operations')
-            console.log("caiu aqui")
+            navigate('/main')
         }
     }
 
@@ -56,35 +54,6 @@ export const AuthProvider = ({ children }) => {
         console.log("logged out!")
         navigate('/')
     };
-
-  
-
-   /* // -- login handle
-    const login = (email, password) => {
-        Axios.post("http://localhost:3000/auth/authenticate", {
-        email: email,
-        password: password,
-      }).then((response) => {
-        //console.log(response)
-        if(!response.data.user){
-            console.log("erro ao realizar requisição")
-        } else {
-            const loggedUser = {
-                id: response.data.user._id,
-                email: response.data.user.email,
-                token: response.data.token
-
-            }
-            // -- salvando  o  usuario authenticado no localStorage
-            localStorage.setItem("user", JSON.stringify(loggedUser))
-            setUser(loggedUser)
-            navigate('/operations');
-          console.log(response.data.token);
-          console.log(JSON.stringify(loggedUser))
-        }
-      });
-      }
-      */
 
       return(
         <AuthContext.Provider

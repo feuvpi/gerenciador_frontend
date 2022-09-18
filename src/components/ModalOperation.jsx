@@ -32,7 +32,7 @@ export const ModalOperation = props => {
 
     // -- handleSubmit
     const handleSubmit = () => {
-        if(props.edit == true){
+        if(props.edit === true){
 
         } else {
 
@@ -59,7 +59,6 @@ export const ModalOperation = props => {
                 const save = await updateOperation(operationData)
                 if (save){
                     console.log("Operação atualizada com sucesso!")
-                    console.log(save)
                 }
             } catch (error) {
                 console.log(error)
@@ -72,7 +71,6 @@ export const ModalOperation = props => {
                 const save = await postOperation(operationData)
                 if(save){
                     console.log("Operação salva com sucesso!")
-                    console.log(save)
                 }
                 } catch (error) {
                     console.log(error)
