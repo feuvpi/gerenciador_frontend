@@ -1,70 +1,90 @@
-# Getting Started with Create React App
+# Gerenciador de ativos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+<img src="https://img.shields.io/github/repo-size/feuvpi/gerenciador_frontend?style=plastic"></img>
+<img src="https://img.shields.io/tokei/lines/github/feuvpi/gerenciador_frontend?style=plastic"></img>
+<img src="https://img.shields.io/github/languages/count/feuvpi/gerenciador_frontend?style=plastic"></img>
+<img src="https://img.shields.io/github/last-commit/feuvpi/gerenciador_frontend?style=plastic"></img>
+<img src="https://img.shields.io/github/forks/feuvpi/gerenciador_frontend?style=plastic"></img>
+<img src="https://img.shields.io/bitbucket/issues/feuvpi/gerenciador_frontend?style=plastic"></img>
+<img src="https://img.shields.io/bitbucket/pr-raw/feuvpi/gerenciador_frontend?style=plastic"></img>
+</div>
 
-## Available Scripts
+<img src="https://github.com/feuvpi/gerenciador_frontend/blob/main/public/printscreen/home.png?raw=true" alt="exemplo imagem">
 
-In the project directory, you can run:
+Aplicação para registro de operações de compra e venda de ativos financeiros e acompanhamento em tempo real.
 
-### `npm start`
+### Ajustes e melhorias
 
-Runs the app in the development mode.\
+O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+
+- [X] Botão para edição de operação
+- [ ] Aba de Carteira mostrando o resumo de cada ativo, com informações atualizadas do preço do ativo, preço médio e rendimento total
+- [ ] Implementação de grafico geral (tempo,preço) demonstrando o desempenho da carteira de ativos
+- [ ] Implementação de grafico (tempo,preço) individual por ativo, acionados a partir do click na respectiva linha.
+- [ ] Atualização da interface dos modais de operação e perfil
+
+## 🚀 Instalando esse projeto:
+
+Para instalar o App, siga estas etapas:
+
+Para instalar as dependencias do projeto:
+```
+npm install
+```
+
+Instalar apenas as dependencias de produção:
+```bash
+npm install --production
+```
+
+## ☕ Usando a aplicação:
+
+#### `npm start`
+
+Roda o app em modo de desenvolvimento.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+A pagina irá recarregar sempre que uma mudança for salva.
+Em casos de erros verifique o console.
 
-### `npm test`
+#### `npm run build`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Compila o aplicativo para produção na pasta `build`.
 
-### `npm run build`
+## 📫 Contribuindo para este projeto:
+<!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Pull requests são bem-vindos. Para mudanças muito grandes é uma boa pratica abrir um isse para que as mudanças sugeridas possam ser discutidas.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Para contribuir com este projeto, siga estas etapas:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Bifurque este repositório.
+2. Crie um branch: `git checkout -b <nome_branch>`.
+3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
+4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
+5. Crie a solicitação de pull.
 
-### `npm run eject`
+Lembre-se de atualizar os testes! ;)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## ⏬ Repositorio da API Interna
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+[Repositorio da API interna no GitHub](https://github.com/feuvpi/MinhaCarteira)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🏛️ Produção
 
-## Learn More
+[Deploy no Heroku](https://gestorportfolio-frontend.herokuapp.com)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📝 Licença
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
