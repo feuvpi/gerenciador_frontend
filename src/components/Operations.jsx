@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../contexts/auth'
 import { PencilIcon, XIcon } from '@heroicons/react/solid'
 import { getOperations, deleteOperation } from '../services/api'
-
+import { format } from 'date-fns'
 
 export default function Operations({childrenToParent}) {
 
@@ -12,12 +12,12 @@ export default function Operations({childrenToParent}) {
     const [show, setShow] = useState(false)
     const [data, setData] = useState({})
     const pass = true;
+   
 
     useEffect(() => {
         (async () => {
           const response = await getOperations(user._id)
           setOperations(response)
-          //setOperations(response.data)
           setLoading(false)
         })()
       }, [])
@@ -28,13 +28,42 @@ export default function Operations({childrenToParent}) {
         setOperations(updated)
       }
 
+      const rows = operations.map((operation) => (
+        <tr className='bg-slate-400 dark:border-gray-700 hover:bg-slate-500 rounded-md'>
+          <td className='py-4 px-6 text-center' value={operation._id} hidden>{operation._id}</td>
+          <td
+            scope='row'
+            className='py-4 px-6 font-medium text-slate-200 whitespace-nowrap'
+          >
+            {operation.symbol}
+          </td>
+          <td className='py-4 px-6 text-center'>{operation.type}</td>
+          <td className='py-4 px-6 text-center'>R${operation.cost}</td>
+          <td className='py-4 px-6 text-center'>{operation.quantity}</td>
+          <td className='py-4 px-6 text-center'>R${parseFloat(operation.cost*operation.quantity)}</td>
+          <td className='py-4 px-6 text-center'>{operation.operationDate}</td>
+          
+          <td id="editOperation" className='py-4 px-6 text-center'>
+            <button id="editOperation" onClick={() => childrenToParent(pass, operation._id, operation.symbol, operation.type, operation.cost, operation.quantity, operation.operationDate)} 
+              className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
+              <PencilIcon id="editOperation"  className='h-4 text-slate-200' />
+            </button>
+          </td>
+          <td id="deleteOperation" className='py-4 px-6 text-center'>
+            <button id="deleteOperation" onClick={() => handleDelete(operation._id)}
+              className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
+              <XIcon id="deleteOperation"  className='h-4 text-slate-200' />
+            </button>
+          </td>
+        </tr>
+      ))
 
     if (loading) {
         return <div className='loading text-slate-300'>Carregando dados......</div>
       }
 
   return (
-    <div className='overflow-x-auto overflow-y-visible h-full relative rounded-lg'>
+    <div id="Operations" className='overflow-x-auto overflow-y-visible h-full relative rounded-lg'>
             <table className='w-full text-sm text-left text-slate-200 rounded-lg'>
               <thead className='text-xs text-gray-700 uppercase bg-indigo-500 dark:text-white'>
                 <tr className=''>
@@ -68,39 +97,9 @@ export default function Operations({childrenToParent}) {
                 </tr>
               </thead>
               <tbody className='rounded-lg'>
-                {operations.map((operation) => (
-                  <tr className='bg-slate-400 dark:border-gray-700 hover:bg-slate-500 rounded-md'>
-                    <td className='py-4 px-6 text-center' value={operation._id} hidden>{operation._id}</td>
-                    <td
-                      scope='row'
-                      className='py-4 px-6 font-medium text-slate-200 whitespace-nowrap'
-                    >
-                      {operation.symbol}
-                    </td>
-                    <td className='py-4 px-6 text-center'>{operation.type}</td>
-                    <td className='py-4 px-6 text-center'>R${operation.cost}</td>
-                    <td className='py-4 px-6 text-center'>{operation.quantity}</td>
-                    <td className='py-4 px-6 text-center'>R${parseFloat(operation.cost*operation.quantity)}</td>
-                    <td className='py-4 px-6 text-center'>{operation.operationDate}</td>
-                    
-                    <td id="editOperation" className='py-4 px-6 text-center'>
-                      <button id="editOperation" onClick={() => childrenToParent(pass, operation._id, operation.symbol, operation.type, operation.cost, operation.quantity, operation.operationDate)} 
-                        className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
-                        <PencilIcon id="editOperation"  className='h-4 text-slate-200' />
-                      </button>
-                    </td>
-                    <td id="deleteOperation" className='py-4 px-6 text-center'>
-                      <button id="deleteOperation" onClick={() => handleDelete(operation._id)}
-                        className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
-                        <XIcon id="deleteOperation"  className='h-4 text-slate-200' />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {rows}
               </tbody>
             </table>
           </div>
   )
 }
-
-//export default Operations

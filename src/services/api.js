@@ -1,9 +1,9 @@
 import axios from 'axios';
 const config = require('../config.json')
 
-//const BASE_URL= config.API_URL || 'http://localhost:3000'
+const BASE_URL= config.API_URL || 'http://localhost:3000'
 
-const BASE_URL = 'http://localhost:3000'
+//const BASE_URL = 'http://localhost:3000'
 
 //configurando a URL base do Axios
 export const api = axios.create({

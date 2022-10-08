@@ -24,8 +24,7 @@ export const Main = () => {
   const [parentType, setParentType] = useState("")
   const [editing, setEditing] = useState("");
 
-  const buttonOperations = document.getElementById("operations");
-  const buttonAssets = document.getElementById("assets");
+  
 
   const childrenToParent = (pass, id, symbol, type, cost, quantity, operationDate) => {
     console.log(symbol)
@@ -40,14 +39,17 @@ export const Main = () => {
   }
 
   const viewOperations = () => {
+    const buttonOperations = document.getElementById("operations");
+    const buttonAssets = document.getElementById("assets");
     setButtons(true)
     buttonAssets.disabled = false;
     buttonOperations.disabled = true;
   }
 
   const viewAssets = () => {
+    const buttonOperations = document.getElementById("operations");
+    const buttonAssets = document.getElementById("assets");
     buttonOperations.disabled = false;
-    console.log(show)
     buttonAssets.disabled = true;
     setButtons(false);
   }
