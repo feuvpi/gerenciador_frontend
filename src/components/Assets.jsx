@@ -1,6 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { OperationContext } from "../contexts/operationContext"
 
-const Assets = () => {
+const Assets = props => {
+
+  const { operationData, setOperationData } = useContext(OperationContext);
+
+  const rows = operationData.map((operation) => (
+    <tr className='bg-slate-400 dark:border-gray-700 hover:bg-slate-500 rounded-md'>
+      <td className='py-4 px-6 text-center' value={operation._id} hidden>{operation._id}</td>
+      <td
+        scope='row'
+        className='py-4 px-6 font-medium text-slate-200 whitespace-nowrap'
+      >
+        {operation.symbol}
+      </td>
+      <td className='py-4 px-6 text-center'>R${operation.cost}</td>
+      <td className='py-4 px-6 text-center'>{operation.quantity}</td>
+      <td className='py-4 px-6 text-center'>R${operation.cost / operation.quantity}</td>
+      <td className='py-4 px-6 text-center'>R${parseFloat(operation.cost*operation.quantity)}</td>
+      <td className='py-4 px-6 text-center'>formula_rendimento</td>
+     
+    </tr>
+  ))
+
   return (
       <>
       <div className="w-full md:h-screen flex flex-col justify-between pt-4 rounded-lg">
@@ -29,19 +51,7 @@ const Assets = () => {
             </tr>
           </thead>
           <tbody>
-            <tr class="bg-slate-400 dark:border-gray-700 hover:bg-slate-500">
-              <th
-                scope="row"
-                class="text-center py-4 px-6 font-medium text-slate-200 whitespace-nowrap"
-              >
-                PETR4
-              </th>
-              <td class="py-4 px-6 text-center">12.0</td>
-              <td class="py-4 px-6 text-center">2000</td>
-              <td class="py-4 px-6 text-center">10.0</td>
-              <td class="py-4 px-6 text-center">24000.00</td>
-              <td class="py-4 px-6 text-center">20%</td>
-            </tr>
+              {rows}
           </tbody>
         </table>
       </div>

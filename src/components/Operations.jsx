@@ -4,13 +4,15 @@ import { PencilIcon, XIcon } from '@heroicons/react/solid'
 import { getOperations, deleteOperation } from '../services/api'
 import { format } from 'date-fns'
 
+import { OperationContext } from "../contexts/operationContext"
+
 export default function Operations({childrenToParent}) {
+
+  const { operationData, setOperationData } = useContext(OperationContext);
 
     const { user } = useContext(AuthContext)
     const [operations, setOperations] = useState([])
     const [loading, setLoading] = useState(true)
-    const [show, setShow] = useState(false)
-    const [data, setData] = useState({})
     const pass = true;
    
 
@@ -18,6 +20,7 @@ export default function Operations({childrenToParent}) {
         (async () => {
           const response = await getOperations(user._id)
           setOperations(response)
+          setOperationData(response)
           setLoading(false)
         })()
       }, [])
@@ -59,11 +62,11 @@ export default function Operations({childrenToParent}) {
       ))
 
     if (loading) {
-        return <div className='loading text-slate-300'>Carregando dados......</div>
+        return <div className='loading text-slate-300'>Carregando dados...</div>
       }
 
   return (
-    <div id="Operations" className='overflow-x-auto overflow-y-visible h-full relative rounded-lg'>
+    <div id="Operations" className='ld ld-bounce-in overflow-x-auto overflow-y-visible h-full relative rounded-lg'>
             <table className='w-full text-sm text-left text-slate-200 rounded-lg'>
               <thead className='text-xs text-gray-700 uppercase bg-indigo-500 dark:text-white'>
                 <tr className=''>

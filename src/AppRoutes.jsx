@@ -9,6 +9,7 @@ import Main from './pages/Main.jsx';
 import FormAuth from './components/FormAuth'
 import FormRegister from './components/FormRegister.jsx';
 import { AuthProvider, AuthContext } from "./contexts/auth";
+import { OperationProvider, OperationContext } from "./contexts/operationContext";
 
 const AppRoutes = () => {
 
@@ -31,12 +32,13 @@ const AppRoutes = () => {
     return(
 
     <AuthProvider>
+        <OperationProvider>
             <Routes>
                 <Route path="/" element={<FormAuth/>}/>
                 <Route path="/register" element={<FormRegister/>}/>
                 <Route path="/main" element={<Private><Main/></Private>}/>
-                
             </Routes>
+            </OperationProvider>
     </AuthProvider>
        
     );
