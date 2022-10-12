@@ -1,9 +1,9 @@
 import axios from 'axios';
 const config = require('../config.json')
 
-const BASE_URL= config.API_URL || 'http://localhost:3000'
+//const BASE_URL= config.API_URL || 'http://localhost:3000'
 
-//const BASE_URL = 'http://localhost:3000'
+const BASE_URL = 'http://localhost:3000'
 
 //configurando a URL base do Axios
 export const api = axios.create({
@@ -100,6 +100,17 @@ export const deleteOperation = async(id) => {
         return res
     } catch (error) {
         console.log(error.response.message)
+    }
+}
+
+
+
+export const quotePrice = async(symbol) => {
+    try {
+        const res = await api.post('/stock/quote', {symbol: symbol})
+        console.log(res)
+    } catch (err) {
+        
     }
 }
 

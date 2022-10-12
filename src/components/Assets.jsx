@@ -1,9 +1,21 @@
+import { set } from 'date-fns'
 import React, { useState, useEffect, useContext } from 'react'
 import { OperationContext } from "../contexts/operationContext"
+import { quotePrice } from '../services/api'
 
 const Assets = props => {
 
+  
+
   const { operationData, setOperationData } = useContext(OperationContext);
+  const { responseData, setResponseData } = useState(undefined)
+
+  useEffect(() => {
+    (async () => {
+      const data = await quotePrice('AAPL')
+      console.log(data)
+    })()
+  })
 
   const rows = operationData.map((operation) => (
     <tr className='bg-slate-400 dark:border-gray-700 hover:bg-slate-500 rounded-md'>
