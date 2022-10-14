@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { getOperations, postOperation } from '../services/api';
+import React, { useState, useContext } from 'react';
+import { postOperation } from '../services/api';
 import { AuthContext } from '../contexts/auth'
 
 export const ModalOperation2 = props => {

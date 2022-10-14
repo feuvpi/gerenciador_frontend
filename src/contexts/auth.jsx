@@ -26,7 +26,6 @@ export const AuthProvider = ({ children }) => {
 
       // -- login handle
       const login = async (email, password) => {
-        let statusMessage = '';
         const response = await createSession(email, password)
         if(!response.data.user){
             //console.log('authentication error')
