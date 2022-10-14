@@ -106,24 +106,17 @@ export const deleteOperation = async(id) => {
 
 
 export const quotePrice = async(symbol) => {
+    let str = ""
     try {
-        const res = await api.post('/stock/quote', {symbol: symbol})
-        console.log(res)
+        const response = await api.post('/stock/quote', {symbol: symbol})
+        str = response.data
+            let replace = str.replaceAll(':', '$').replaceAll(',', '$')
+            let currentPriceString = replace.split('$', 2);
+            let currentPrice = parseFloat(currentPriceString[1])
+            return currentPrice
     } catch (err) {
-        
+        console.log(err.response.message)
     }
+
+
 }
-
-/*  \
-
-router.post("/operation", async (req, res) => {
-  console.log(req.body);
-  //res.send('should post a new operation in database')
-  const operation = new Operation({
-    symbol: req.body.symbol,
-    unityCost: req.body.cost,
-    quantity: req.body.quantity,
-    totalCost: req.body.type,
-  });
-
-*/

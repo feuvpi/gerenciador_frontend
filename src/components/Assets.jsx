@@ -14,6 +14,7 @@ const Assets = props => {
     (async () => {
       const data = await quotePrice('AAPL')
       console.log(data)
+      
     })()
   })
 
