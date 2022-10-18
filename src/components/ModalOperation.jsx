@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { postOperation, updateOperation } from '../services/api';
 import { AuthContext } from '../contexts/auth'
 
+
+
 export const ModalOperation = props => {
 
     // -- states
@@ -11,6 +13,7 @@ export const ModalOperation = props => {
     const [quantity, setQuantity] = useState(props.quantity);
     const [type, setType] = useState("");
     const [total, setTotal] = useState((props.quantity)*(props.cost))
+    const [statusMessage, setStatusMessage] = useState("")
 
     
     // -- calculating operation total cost
@@ -30,17 +33,13 @@ export const ModalOperation = props => {
 
     }
 
-    // -- handleSubmit
-    const handleSubmit = () => {
-        if(props.edit === true){
-
-        } else {
-
-        }
+    const wait = () => {
+        console.log("fechando modal...")
+        props.modalOpToMain(false)
     }
 
     // -- method for calling the create operation service
-    const addOperation = async () => {
+    const handleSubmit = async () => {
         //console.log(api.defaults.headers.Authorization)
         const operationData = {
             symbol: symbol,
@@ -58,10 +57,11 @@ export const ModalOperation = props => {
             try {
                 const save = await updateOperation(operationData)
                 if (save){
-                    console.log("Operação atualizada com sucesso!")
+                    setStatusMessage("Operação atualizada com sucesso!");
                 }
             } catch (error) {
                 console.log(error)
+                setStatusMessage(error.message)
             }
 
 
@@ -70,22 +70,26 @@ export const ModalOperation = props => {
             try {
                 const save = await postOperation(operationData)
                 if(save){
-                    console.log("Operação salva com sucesso!")
+                    setStatusMessage("Operação salva com sucesso!")
                 }
                 } catch (error) {
                     console.log(error)
+                    setStatusMessage(error.message)
                 }
+                
 
         }
+        console.log(statusMessage)
+
+        // -- close modal after submit
+
+       // setTimeout(wait(), 3000, {position:1});
+
+        setTimeout(function(){
+            wait({position:1})
+         }.bind(this), 2000)
+        
     }
-
-    // // -- method for edit operation
-    // const editOperation = async (e) = {
-
-    // }
-
-    //api.defaults.headers.Authorization = user.token
-    //console.log(api.defaults.headers.Authorization)
 
     if (!props.show){
         return null
@@ -112,9 +116,11 @@ export const ModalOperation = props => {
                             <option id="Modal" value="COMPRAR">COMPRAR</option>
                             <option id="Modal" value="VENDER">VENDER</option>
                         </select>
+                        <p className="text-green-600 font-bold pt-.5">{statusMessage}</p>
                         <label id="Modal" className="pt-6 text-indigo-700 font-semibold text-right">TOTAL:</label>
                         <h3 id="Modal" className="text-xl text-right font-bold">R${total}</h3>
-                        <button type="button" onClick={(e) => {addOperation(e)}} id="Modal" className="mt-6">SALVAR</button>
+                        <button type="button" onClick={(e) => {handleSubmit(e)}} id="Modal" className="mt-6">SALVAR</button>
+                        
                     </form>
                 </div>
             </div>

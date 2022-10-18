@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../contexts/auth'
 import { PencilIcon, XIcon } from '@heroicons/react/solid'
 import { getOperations, deleteOperation } from '../services/api'
-import { format } from 'date-fns'
 
 import { OperationContext } from "../contexts/operationContext"
 
-export default function Operations({childrenToParent}) {
+export const Operations = props => {
 
   const { operationData, setOperationData } = useContext(OperationContext);
 
@@ -23,7 +22,7 @@ export default function Operations({childrenToParent}) {
           setOperationData(response)
           setLoading(false)
         })()
-      }, [])
+      }, [props.show])
 
       const handleDelete = (id) => {
         deleteOperation(id)
@@ -47,7 +46,7 @@ export default function Operations({childrenToParent}) {
           <td className='py-4 px-6 text-center'>{operation.operationDate}</td>
           
           <td id="editOperation" className='py-4 px-6 text-center'>
-            <button id="editOperation" onClick={() => childrenToParent(pass, operation._id, operation.symbol, operation.type, operation.cost, operation.quantity, operation.operationDate)} 
+            <button id="editOperation" onClick={() => props.childrenToParent(pass, operation._id, operation.symbol, operation.type, operation.cost, operation.quantity, operation.operationDate)} 
               className='h-8 hover:bg-indigo-400 align-center justify-center text-center place-content-center place-items-center'>
               <PencilIcon id="editOperation"  className='h-4 text-slate-200' />
             </button>
@@ -106,3 +105,5 @@ export default function Operations({childrenToParent}) {
           </div>
   )
 }
+
+export default Operations

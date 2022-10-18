@@ -1,5 +1,5 @@
 // -- react
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 
 // -- components
 import Navbar from '../components/Navbar.jsx'
@@ -24,7 +24,11 @@ export const Main = () => {
   const [parentType, setParentType] = useState("")
   const [editing, setEditing] = useState("");
 
-  
+
+  const modalOpToMain = (show) => {
+    console.log("entrei aqui")
+    setShow(show)
+  }
 
   const childrenToParent = (pass, id, symbol, type, cost, quantity, operationDate) => {
     console.log(symbol)
@@ -53,6 +57,8 @@ export const Main = () => {
     buttonAssets.disabled = true;
     setButtons(false);
   }
+
+
 
   return (
     <>
@@ -126,10 +132,10 @@ export const Main = () => {
   </div>
 </div>
 
-            { buttons ? <Operations childrenToParent={childrenToParent} /> : <Assets/> }      
+            { buttons ? <Operations childrenToParent={childrenToParent} show={show} /> : <Assets/> }      
 
         </div>
-        {show && <ModalOperation id='ModalOperation' show={show} parentId={parentId} symbol={parentSymbol} cost={parentCost} quantity={parentQuantity} edit={editing}/>}
+        {show && <ModalOperation id='ModalOperation' modalOpToMain={modalOpToMain} show={show} parentId={parentId} symbol={parentSymbol} cost={parentCost} quantity={parentQuantity} edit={editing}/>}
       </div>
     </>
   )

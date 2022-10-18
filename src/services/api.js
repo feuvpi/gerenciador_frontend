@@ -56,7 +56,7 @@ export const postOperation = async(operation) => {
             quantity: operation.quantity,
             type: operation.type,
         })
-        console.log(res)
+        return res
     } catch (err) {
         if(err.response){
             console.log(err.response.status);
@@ -117,6 +117,4 @@ export const quotePrice = async(symbol) => {
     } catch (err) {
         console.log(err.response.message)
     }
-
-
 }

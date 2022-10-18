@@ -15,6 +15,10 @@ const Navbar = () => {
 
   }
 
+  const childrenToParent = (pass) => {
+    setShow(pass)
+  }
+
   const { user } = useContext(AuthContext)
   
   const { logout } = useContext(AuthContext)
@@ -28,6 +32,10 @@ const Navbar = () => {
   // const modalPerfilToNav = (show) => {
   //   console.log(show)
   // }
+
+  const modalPerfilToNav = (show) => {
+    setShow(show)
+  }
 
 
   document.addEventListener('click', function(event){
@@ -74,7 +82,7 @@ const Navbar = () => {
           <button onClick={logout}>SAIR</button>
         </div>
       </ul>
-      {show && <ModalPerfil show={show} name={user.name} email={user.email} id={user._id}/>}
+      {show && <ModalPerfil modalPerfilToNav={modalPerfilToNav} show={show} name={user.name} email={user.email} id={user._id}/>}
     </div>
   )
 }
