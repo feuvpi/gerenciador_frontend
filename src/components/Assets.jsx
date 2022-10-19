@@ -22,12 +22,9 @@ const Assets = props => {
       // -- cleaning assets state
       setAssets({})
 
-      console.log(operationData)
-
       // -- create assets
       const createAssets = await operationData.map((operation) => {
         if(!(assetsDict[operation.symbol])){
-         console.log("tem que entrar aqui ao menos 3x")
           var asset = {
             symbol: operation.symbol,
             currentPrice: 0,
@@ -41,25 +38,20 @@ const Assets = props => {
         }
         
       })
-
       
 
       // -- current price
       const currentPrice = await operationData.map(async (operation) => {
         var lastPrice = await quotePrice(operation.symbol)
         var currentAsset = assetsDict[operation.symbol]
-        currentAsset.currentPrice = lastPrice
+        currentAsset.currentPrice = parseFloat(lastPrice)
         assetsDict = {...assetsDict, [operation.symbol]: currentAsset}
       })
-
-      
-
       
 
       // -- quantity balance
       const updateBalance = await operationData.map((operation) => {
         var currentAsset = assetsDict[operation.symbol]
-        console.log(currentAsset)
         let updatedBalance = 0
         if(operation.type == "COMPRAR"){
           updatedBalance =+ operation.quantity
@@ -67,11 +59,10 @@ const Assets = props => {
           updatedBalance =+ operation.quantity
         }
         currentAsset.balance = updatedBalance
-        
         assetsDict = {...assetsDict, [operation.symbol]: currentAsset}
       })
 
-      console.log(assetsDict)
+      
 
       // -- mean price
       const meanPrice = operationData.map((operation) => {
@@ -97,29 +88,32 @@ const Assets = props => {
   //CRIAR DICIONARIO
   //ADICIONAR ATIVOS AO DICIONARIO ITERANDO COM OPERATION DATA
 
-  
-  console.log(assets)
 
+  
   if (loading) {
     return <div className='loading text-slate-300'>Carregando dados...</div>
   }
 
-  const rows = Object.keys(assets).map((asset) => (
+  console.log(assets)
+
+  const test = Object.entries(assets).map((asset) => {
+    console.log(asset[1].currentPrice)
+  })
+
+  const rows = Object.entries(assets).map((asset) => (
     <tr className='bg-slate-400 dark:border-gray-700 hover:bg-slate-500 rounded-md'>
-      <td
-        scope='row'
-        className='py-4 px-6 font-medium text-slate-200 whitespace-nowrap'
-      >
-        {asset.symbol}
+      <td scope='row' className='py-4 px-6 font-medium text-slate-200 whitespace-nowrap'>
+        {asset[1].symbol}
       </td>
-      <td className='py-4 px-6 text-center'>R${asset.currentPrice}</td>
-      <td className='py-4 px-6 text-center'>{asset.balance}</td>
-      <td className='py-4 px-6 text-center'>R${asset.meanPrice}</td>
-      <td className='py-4 px-6 text-center'>R${parseFloat(asset.currentPrice*asset.balance)}</td>
-      <td className='py-4 px-6 text-center'>%{(((asset.meanPrice / asset.currentPrice)-1)*100).toFixed(2)}</td>
-     
+      <td className='py-4 px-6 text-center'>R${asset[1].currentPrice}</td>
+      <td className='py-4 px-6 text-center'>{asset[1].balance}</td>
+      <td className='py-4 px-6 text-center'>R${asset[1].meanPrice}</td>
+      <td className='py-4 px-6 text-center'>R${parseFloat(asset[1].currentPrice*asset[1].balance)}</td>
+      <td className='py-4 px-6 text-center'>%{(((asset[1].meanPrice / asset[1].currentPrice)-1)*100).toFixed(2)}</td>
     </tr>
   ))
+
+  console.log(rows)
 
   return (
       <>

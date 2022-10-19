@@ -60,6 +60,8 @@ export const Operations = props => {
         </tr>
       ))
 
+      console.log(rows)
+
     if (loading) {
         return <div className='loading text-slate-300'>Carregando dados...</div>
       }

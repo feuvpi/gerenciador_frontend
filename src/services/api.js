@@ -34,9 +34,8 @@ export const api = axios.create({
 
 // -- requisição para buscar (GET) todas as operações salvas por um determinado usuario
 export const getOperations = async (user) => {
-    //console.log("user: " + user)
-    //console.log(JSON.parse(localStorage.getItem('user')).token)
-    //console.log("token2: " + api.defaults.headers.Authorization)
+    console.log("entrei aqui")
+    console.log(user)
     try {
         const response = await api.post('/operations', {user: user})
             return response.data;
