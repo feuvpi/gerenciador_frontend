@@ -28,10 +28,11 @@ export const AuthProvider = ({ children }) => {
       const login = async (email, password) => {
         const response = await createSession(email, password)
         if(!response.data.user){
-            //console.log('authentication error')
+            
             //statusMessage = { status: false, message:'Credenciais de autenticação invalida. Verifique seu e-mail e sua senha.'}
             return response;
         } else {
+            console.log(response)
             const loggedUser = {
                 name: response.data.user.name,
                 _id: response.data.user._id,

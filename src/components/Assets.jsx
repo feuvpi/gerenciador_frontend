@@ -2,104 +2,100 @@ import React, { useState, useEffect, useContext } from 'react'
 import { OperationContext } from "../contexts/operationContext"
 import { quotePrice } from '../services/api'
 
-const Assets = props => {
+
+const Assets = () => {
 
   const [loading, setLoading] = useState(true)
 
   const { operationData } = useContext(OperationContext);
 
   const [ assets, setAssets ] = useState(null);
+  console.log("foda-se curintia")
+  const [hasUpdated, setHasUpdated] = useState(false);
+  var assetsDict = {}
+
+  const createAssets =operationData.map((operation) => {
+    if(!(assetsDict[operation.symbol])){
+      var currentAsset = {
+        symbol: operation.symbol,
+        currentPrice: 0,
+        meanPrice: 0,
+        balance: 0,
+        totalBought: 0,
+        totalQuantityBought: 0
+      }
+      assetsDict = {...assetsDict, [operation.symbol]: currentAsset}
+    }
+  })
 
   
+
+  const meanPrice = operationData.map((operation) => {
+    var currentAsset = assetsDict[operation.symbol]
+    if(operation.type == "COMPRAR"){
+      currentAsset.totalBought =+ operation.cost * operation.quantity
+      currentAsset.totalQuantityBought =+ operation.quantity
+      currentAsset.meanPrice = currentAsset.totalBought / currentAsset.totalQuantityBought
+      assetsDict = {...assetsDict, [operation.symbol]: currentAsset}
+      
+    } 
+    
+  })
+
+   // -- quantity balance
+   const updateBalance = operationData.map((operation) => {
+    var currentAsset = assetsDict[operation.symbol]
+    let updatedBalance = 0
+    if(operation.type == "COMPRAR"){
+      updatedBalance =+ operation.quantity
+    } else {
+      updatedBalance =+ operation.quantity
+    }
+    currentAsset.balance = updatedBalance
+    assetsDict = {...assetsDict, [operation.symbol]: currentAsset}
+    
+  })
+
+
 
   useEffect(() => {
 
-    
+    // console.log("foda-se curintia")
     (async () => { 
-
-      var assetsDict = {}
-
-      // -- cleaning assets state
-      setAssets({})
-
-      // -- create assets
-      const createAssets = await operationData.map((operation) => {
-        if(!(assetsDict[operation.symbol])){
-          var asset = {
-            symbol: operation.symbol,
-            currentPrice: 0,
-            meanPrice: 0,
-            balance: 0,
-            totalBought: 0,
-            totalQuantityBought: 0
-          }
-          assetsDict = {...assetsDict, [operation.symbol]: asset}
-          //setAssets({...assets, [operation.symbol]: asset})
-        }
-        
-      })
-      
-
-      // -- current price
-      const currentPrice = await operationData.map(async (operation) => {
+ 
+    const currentPrice = await operationData.map(async (operation) => {
+      var currentAsset = assetsDict[operation.symbol]
+      try {
         var lastPrice = await quotePrice(operation.symbol)
-        var currentAsset = assetsDict[operation.symbol]
-        currentAsset.currentPrice = parseFloat(lastPrice)
-        assetsDict = {...assetsDict, [operation.symbol]: currentAsset}
-      })
-      
+      } catch (error) {
+        console.log("erro na requisição de current price:")
+        console.log(error)
+      }
+      if(lastPrice){
+        console.log("last updated price: " + lastPrice)
+        operation.currentPrice = lastPrice;
+        currentAsset.currentPrice = parseFloat(lastPrice);
+      } else if (operation.currentPrice){
+        currentAsset.currentPrice = parseFloat(operation.currentPrice)
+      } else {
+        console.log("no updated current price for this asset.")
+      }
 
-      // -- quantity balance
-      const updateBalance = await operationData.map((operation) => {
-        var currentAsset = assetsDict[operation.symbol]
-        let updatedBalance = 0
-        if(operation.type == "COMPRAR"){
-          updatedBalance =+ operation.quantity
-        } else {
-          updatedBalance =+ operation.quantity
-        }
-        currentAsset.balance = updatedBalance
-        assetsDict = {...assetsDict, [operation.symbol]: currentAsset}
-      })
-
-      
-
-      // -- mean price
-      const meanPrice = operationData.map((operation) => {
-        var currentAsset = assetsDict[operation.symbol]
-        if(operation.type == "COMPRAR"){
-          currentAsset.totalBought =+ operation.cost * operation.quantity
-          currentAsset.totalQuantityBought =+ operation.quantity
-          currentAsset.meanPrice = currentAsset.totalBought / currentAsset.totalQuantityBought
-          assetsDict = {...assetsDict, [operation.symbol]: currentAsset}
-
-        } 
-        
-      })
-
+      assetsDict = {...assetsDict, [operation.symbol]: currentAsset}  
       setAssets(assetsDict)
+    }) 
 
-      // meanPrice()
-      // updateBalance()
-      setLoading(false)
-    })()
+    }
+    
+    )()
   }, [])
 
-  //CRIAR DICIONARIO
-  //ADICIONAR ATIVOS AO DICIONARIO ITERANDO COM OPERATION DATA
 
-
-  
-  if (loading) {
+  if (assets === null) {
     return <div className='loading text-slate-300'>Carregando dados...</div>
   }
 
-  console.log(assets)
-
-  const test = Object.entries(assets).map((asset) => {
-    console.log(asset[1].currentPrice)
-  })
-
+  
   const rows = Object.entries(assets).map((asset) => (
     <tr className='bg-slate-400 dark:border-gray-700 hover:bg-slate-500 rounded-md'>
       <td scope='row' className='py-4 px-6 font-medium text-slate-200 whitespace-nowrap'>
@@ -112,10 +108,12 @@ const Assets = props => {
       <td className='py-4 px-6 text-center'>%{(((asset[1].meanPrice / asset[1].currentPrice)-1)*100).toFixed(2)}</td>
     </tr>
   ))
-
-  console.log(rows)
-
+  
   return (
+
+    
+
+
       <>
       <div className="w-full md:h-screen flex flex-col justify-between pt-4 rounded-lg">
       <div class="overflow-x-auto relative rounded-lg">
