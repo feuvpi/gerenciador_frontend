@@ -80,14 +80,14 @@ export const Main = () => {
               className='bg-slate-300 hover:bg-slate-300 text-gray-800 font-bold hover:text-gray-800 py-2 px-4 focus:outline-none rounded-l disabled:opacity-75'
               id="assets"
             > 
-              CARTEIRA
+              ASSETS
             </button>
             <button
               id="operations"
               onClick={viewOperations}
               className='bg-slate-300 hover:bg-slate-300 hover:text-gray-800 text-gray-800 font-bold py-2 px-4 rounded-r focus:outline-none disabled:opacity-75'
             > 
-              OPERAÇÕES
+              OPERATIONS
             </button>
           </div>
         </div>
@@ -110,7 +110,7 @@ export const Main = () => {
             type='button'
             className='mb-5 inline-block px-4 py-1.5 bg-slate-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'
           >
-            +OPERAÇÃO
+            +ADD OPERATION
           </button>
 
 

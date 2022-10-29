@@ -57,7 +57,7 @@ if(authenticated === true){
               />
               {/* --- heading --- */} 
               <h2 className="mt-6 text-slate-200 text-center text-3xl font-extrabold text-black-900">
-                Gerenciador de operações financeiras. Entre na sua conta
+                Stock assets manager. Track your digital Assets.
               </h2>
               {/* --- link para criar novo cadastro --- */} 
               <p className="mt-2 text-center text-sm">
@@ -65,7 +65,7 @@ if(authenticated === true){
                   href="/register"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
-                  Não é registrado? Crie uma conta gratuitamente.
+                  Not registered? Create an account now, it's free!.
                 </a>
               </p>
             </div>
@@ -98,7 +98,7 @@ if(authenticated === true){
                     autocomplete="email"
                     required
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Endereço de E-mail"
+                    placeholder="E-mail address"
                     onChange={(e) => {setEmail(e.target.value);}}
                   />
                 </div>
@@ -118,7 +118,7 @@ if(authenticated === true){
                     autocomplete="current-password"
                     required
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Senha"
+                    placeholder="Password"
                     onChange={(e) => {setPassword(e.target.value);}}
                   />
                 </div>
@@ -141,7 +141,7 @@ if(authenticated === true){
                     for="remember-me"
                     className="ml-2 block text-sm text-white"
                   >
-                    Lembrar
+                    Remember-me
                   </label>
                 </div>
 
@@ -152,7 +152,7 @@ if(authenticated === true){
                 {/* --- recuperar senha --- */} 
                 <div className="text-sm">
                   <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                    Esqueceu sua senha?
+                    Forgot your password?
                   </a>
                 </div>
               </div>
@@ -180,7 +180,7 @@ if(authenticated === true){
                       />
                     </svg>
                   </span>
-                  Entrar
+                  Log In
                 </button>
               </div>
             </form>

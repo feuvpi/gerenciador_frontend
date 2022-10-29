@@ -98,7 +98,7 @@ const Assets = () => {
   
   const rows = Object.entries(assets).map((asset) => (
     <tr className='bg-slate-400 dark:border-gray-700 hover:bg-slate-500 rounded-md'>
-      <td scope='row' className='py-4 px-6 font-medium text-slate-200 whitespace-nowrap'>
+      <td scope='row' className='py-4 px-6 font-medium text-slate-200 whitespace-nowrap text-center'>
         {asset[1].symbol}
       </td>
       <td className='py-4 px-6 text-center'>R${asset[1].currentPrice}</td>
@@ -121,22 +121,22 @@ const Assets = () => {
           <thead class="text-xs text-gray-700 uppercase bg-indigo-500 dark:text-white">
             <tr>
               <th scope="col" class="py-3 px-6 text-center">
-                ATIVO
+                ASSET
               </th>
               <th scope="col" class="py-3 px-6 text-center">
-                COTAÇÃO
+                QUOTE
               </th>
               <th scope="col" class="py-3 px-6 text-center">
-                QUANTIDADE
+                QUANTITY
               </th>
               <th scope="col" class="py-3 px-6 text-center">
-                PREÇO MÉDIO
+                MEAN PRICE
               </th>
               <th scope="col" class="py-3 px-6 text-center">
                 TOTAL
               </th>
               <th scope="col" class="py-3 px-6 text-center">
-                RENDIMENTO
+                RESULT
               </th>
             </tr>
           </thead>

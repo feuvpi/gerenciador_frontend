@@ -58,8 +58,8 @@ const Navbar = () => {
           </Link>
         </div>
         <div className='flex hidden md:flex pr-4 items-center self-center'>
-            <button id='openModal' onClick={() => {if(!show){setShow(true)} else {setShow(false); setShow(false)}}} className='flex bg-zinc-100 text-indigo-700 hover:bg-zinc-300 w-16 h-8 text-sm inline-flex place-content-center place-items-center'>PERFIL1</button>
-            <button onClick={logout} className="bg-zinc-100 text-indigo-700 hover:bg-zinc-300 inline-flex h-8 text-sm w-16 place-content-center place-items-center">SAIR</button>
+            <button id='openModal' onClick={() => {if(!show){setShow(true)} else {setShow(false); setShow(false)}}} className='flex bg-zinc-100 text-indigo-700 hover:bg-zinc-300 w-16 h-8 text-sm inline-flex place-content-center place-items-center'>ACCOUNT</button>
+            <button onClick={logout} className="bg-zinc-100 text-indigo-700 hover:bg-zinc-300 inline-flex h-8 text-sm w-16 place-content-center place-items-center">EXIT</button>
             <ModalPerfil show={show} name={user.name} email={user.email} id={user._id}/>
         </div>
         {/* Collapsable Menu */}

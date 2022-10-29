@@ -73,28 +73,28 @@ export const Operations = props => {
                     USER.ID
                   </th>
                   <th scope='col' className='py-3 px-6'>
-                    ATIVO
+                    ASSET
                   </th>
                   <th scope='col' className='py-3 px-6 text-center'>
-                    TIPO
+                    TYPE
                   </th>
                   <th scope='col' className='py-3 px-6 text-center'>
-                    PREÇO
+                    COST
                   </th>
                   <th scope='col' className='py-3 px-6 text-center'>
-                    QUANTIDADE
+                    QUANTITY
                   </th>
                   <th scope='col' className='py-3 px-6 text-center'>
                     TOTAL
                   </th>
                   <th scope='col' className='py-3 px-6 text-center'>
-                    DATA
+                    DATE
                   </th>
                   <th scope='col' className='py-3 px-6 text-center'>
-                    EDITAR
+                    EDIT
                   </th>
                   <th scope='col' className='py-3 px-6 text-center'>
-                    DELETAR
+                    DELETE
                   </th>
                 </tr>
               </thead>
