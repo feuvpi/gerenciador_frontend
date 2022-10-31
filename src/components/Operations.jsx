@@ -12,7 +12,7 @@ export const Operations = props => {
     const { user } = useContext(AuthContext)
     const [operations, setOperations] = useState([])
     const [loading, setLoading] = useState(true)
-    const pass = true;
+    const pass = false;
    
 
     useEffect(() => {
