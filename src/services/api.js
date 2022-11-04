@@ -1,9 +1,10 @@
 import axios from 'axios';
 const config = require('../config.json')
 
-//const BASE_URL= config.API_URL || 'http://localhost:3000'
+const BASE_URL= config.API_URL || 'http://localhost:3000'
 
-const BASE_URL = 'http://localhost:3000'
+// -- use backend locally 
+//const BASE_URL = 'http://localhost:3000'
 
 //configurando a URL base do Axios
 export const api = axios.create({
@@ -34,8 +35,6 @@ export const api = axios.create({
 
 // -- requisição para buscar (GET) todas as operações salvas por um determinado usuario
 export const getOperations = async (user) => {
-    console.log("entrei aqui")
-    console.log(user)
     try {
         const response = await api.post('/operations', {user: user})
             return response.data;
