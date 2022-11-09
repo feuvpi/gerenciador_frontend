@@ -5,6 +5,7 @@ import { getOperations, deleteOperation } from '../services/api'
 
 import { OperationContext } from "../contexts/operationContext"
 
+
 export const Operations = props => {
 
   const { operationData, setOperationData } = useContext(OperationContext);
@@ -12,15 +13,20 @@ export const Operations = props => {
     const { user } = useContext(AuthContext)
     const [operations, setOperations] = useState([])
     const [loading, setLoading] = useState(true)
-    const pass = false;
+    const pass = true;
    
 
     useEffect(() => {
         (async () => {
-          const response = await getOperations(user._id)
-          setOperations(response)
-          setOperationData(response)
-          setLoading(false)
+          try {
+            const response = await getOperations(user._id)
+            setOperations(response)
+            setOperationData(response)
+            setLoading(false)
+          } catch (error) {
+            console.log("error ao realizar requisição para API interna.", error)
+          }
+          
         })()
       }, [props.show])
 
@@ -28,6 +34,10 @@ export const Operations = props => {
         deleteOperation(id)
         const updated = operations.filter(u => u._id !== id)
         setOperations(updated)
+      }
+
+      if (loading || operations === undefined ) {
+        return <div className='loading text-slate-300'>Carregando dados...</div>
       }
 
       const rows = operations.map((operation) => (
@@ -60,9 +70,7 @@ export const Operations = props => {
         </tr>
       ))
 
-    if (loading) {
-        return <div className='loading text-slate-300'>Carregando dados...</div>
-      }
+
 
   return (
     <div id="Operations" className='ld ld-bounce-in overflow-x-auto overflow-y-visible h-full relative rounded-lg'>
