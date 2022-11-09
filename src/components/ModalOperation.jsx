@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { postOperation, updateOperation } from '../services/api';
 import { AuthContext } from '../contexts/auth'
 
@@ -57,11 +57,12 @@ export const ModalOperation = props => {
             try {
                 const save = await updateOperation(operationData)
                 if (save){
-                    setStatusMessage("Operação atualizada com sucesso!");
+                    console.log("Operação atualizada com sucesso!")
                 }
             } catch (error) {
                 console.log(error)
                 setStatusMessage(error.message)
+                return
             }
 
 
@@ -70,20 +71,24 @@ export const ModalOperation = props => {
             try {
                 const save = await postOperation(operationData)
                 if(save){
-                    setStatusMessage("Operation saved!")
+                    console.log("operação salva com sucesso")
                 }
                 } catch (error) {
                     console.log(error)
                     setStatusMessage(error.message)
+                    return;
                 }
+                
                 
 
         }
         console.log(statusMessage)
 
-        // -- close modal after submit
-
-       // setTimeout(wait(), 3000, {position:1});
+        if(props.edit === true){
+            setStatusMessage("Operação atualizada com sucesso!");
+        } else {
+            setStatusMessage("Operation saved!")
+        }
 
         setTimeout(function(){
             wait({position:1})
