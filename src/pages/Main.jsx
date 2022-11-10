@@ -15,7 +15,6 @@ export const Main = () => {
   // - show state for modal opening/closing
   const [show, setShow] = useState(false)
   const [buttons, setButtons] = useState(true)
-  const [data, setData] = useState("")
 
   const [parentId, setParentId] = useState("")
   const [parentSymbol, setParentSymbol] = useState("")
@@ -31,8 +30,8 @@ export const Main = () => {
   }
 
   const childrenToParent = (pass, id, symbol, type, cost, quantity, operationDate) => {
-    console.log(symbol)
-    console.log(id)
+    console.log(pass)
+    console.log(show)
     setEditing(pass);
     setParentId(id)
     setParentSymbol(symbol)
@@ -69,7 +68,10 @@ export const Main = () => {
       />
       <div
         onClick={e => {
-          setShow(handleClose(e, show))
+          if(handleClose(e, show) !== null){
+            setShow(handleClose(e, show))
+          }
+          
         }}
         className='overflow-y-visible h-screen flex flex-col pt-28 px-8 bg-slate-800'
       >
