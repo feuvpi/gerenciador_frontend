@@ -101,10 +101,10 @@ const Assets = () => {
       <td scope='row' className='py-4 px-6 font-medium text-slate-200 whitespace-nowrap text-center'>
         {asset[1].symbol}
       </td>
-      <td className='py-4 px-6 text-center'>R${asset[1].currentPrice}</td>
+      <td className='py-4 px-6 text-center'>USD${asset[1].currentPrice}</td>
       <td className='py-4 px-6 text-center'>{asset[1].balance}</td>
-      <td className='py-4 px-6 text-center'>R${asset[1].meanPrice}</td>
-      <td className='py-4 px-6 text-center'>R${parseFloat(asset[1].currentPrice*asset[1].balance)}</td>
+      <td className='py-4 px-6 text-center'>USD${asset[1].meanPrice}</td>
+      <td className='py-4 px-6 text-center'>USD${parseFloat(asset[1].currentPrice*asset[1].balance)}</td>
       <td className='py-4 px-6 text-center'>%{(((asset[1].meanPrice / asset[1].currentPrice)-1)*100).toFixed(2)}</td>
     </tr>
   ))
