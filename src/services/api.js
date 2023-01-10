@@ -6,6 +6,11 @@ const BASE_URL= config.API_URL || 'http://localhost:3000'
 // -- use backend locally 
 //const BASE_URL = 'http://localhost:3000'
 
+
+//axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
+
 //configurando a URL base do Axios
 export const api = axios.create({
     //baseURL: "https://gestorportfolio-backend.herokuapp.com/",
