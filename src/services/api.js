@@ -7,9 +7,7 @@ const BASE_URL= config.API_URL || 'http://localhost:3000'
 //const BASE_URL = 'http://localhost:3000'
 
 
-//axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
+axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
 
 //configurando a URL base do Axios
 export const api = axios.create({
